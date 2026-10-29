@@ -1,0 +1,223 @@
+{
+  "topology": "grid",
+  "packet_loss_rate": 0.2,
+  "max_async_delay": 0,
+  "num_rounds": 20,
+  "final_avg_accuracy": 0.99086,
+  "final_avg_loss": 0.03357073560007847,
+  "final_consensus_error": 0.6611883044242859,
+  "total_communication": {
+    "attempted": 200,
+    "dropped": 43,
+    "delivered_immediate": 157,
+    "delayed": 0,
+    "bytes_attempted": 165537600,
+    "bytes_delivered": 129947016
+  },
+  "per_round_accuracy": [
+    0.9718,
+    0.9808600000000001,
+    0.9846,
+    0.9862,
+    0.9867800000000001,
+    0.98742,
+    0.9891,
+    0.9886800000000001,
+    0.98964,
+    0.9899600000000002,
+    0.9903599999999999,
+    0.9895200000000001,
+    0.9898999999999999,
+    0.99024,
+    0.99106,
+    0.9902,
+    0.99092,
+    0.99074,
+    0.99138,
+    0.99086
+  ],
+  "per_round_consensus_error": [
+    0.817568302154541,
+    0.8447454571723938,
+    0.9450379610061646,
+    0.8595461845397949,
+    0.7675550580024719,
+    1.0781879425048828,
+    0.8344904184341431,
+    0.9135369062423706,
+    1.15799880027771,
+    0.9345070123672485,
+    0.7561623454093933,
+    0.825547993183136,
+    1.0128614902496338,
+    0.8020694851875305,
+    0.5555188655853271,
+    0.7211815118789673,
+    0.6398407220840454,
+    0.6739383935928345,
+    0.4465756416320801,
+    0.6611883044242859
+  ],
+  "per_round_comm_stats": [
+    {
+      "attempted": 10,
+      "dropped": 2,
+      "delivered_immediate": 8,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 6621504
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 3,
+      "delivered_immediate": 7,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 5793816
+    },
+    {
+      "attempted": 10,
+      "dropped": 2,
+      "delivered_immediate": 8,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 6621504
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 4,
+      "delivered_immediate": 6,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 4966128
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 4,
+      "delivered_immediate": 6,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 4966128
+    },
+    {
+      "attempted": 10,
+      "dropped": 3,
+      "delivered_immediate": 7,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 5793816
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 4,
+      "delivered_immediate": 6,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 4966128
+    },
+    {
+      "attempted": 10,
+      "dropped": 3,
+      "delivered_immediate": 7,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 5793816
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 2,
+      "delivered_immediate": 8,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 6621504
+    },
+    {
+      "attempted": 10,
+      "dropped": 2,
+      "delivered_immediate": 8,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 6621504
+    },
+    {
+      "attempted": 10,
+      "dropped": 2,
+      "delivered_immediate": 8,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 6621504
+    },
+    {
+      "attempted": 10,
+      "dropped": 1,
+      "delivered_immediate": 9,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 7449192
+    },
+    {
+      "attempted": 10,
+      "dropped": 4,
+      "delivered_immediate": 6,
+      "delayed": 0,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 4966128
+    }
+  ]
+}

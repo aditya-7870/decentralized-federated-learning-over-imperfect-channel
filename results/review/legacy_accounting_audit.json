@@ -1,0 +1,362 @@
+[
+  {
+    "topology": "ring",
+    "loss": 0.0,
+    "delta": 0.0,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.0,
+    "delta": 0.01,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.0,
+    "delta": 0.05,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.0,
+    "delta": 0.1,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.0,
+    "delta": 0.3,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.0,
+    "delta": 0.5,
+    "broadcasts_suppressed": 1,
+    "broadcast_opportunities": 100,
+    "actual_messages": 198,
+    "full_messages": 200,
+    "actual_message_savings_pct": 1.0000000000000009
+  },
+  {
+    "topology": "ring",
+    "loss": 0.2,
+    "delta": 0.0,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.2,
+    "delta": 0.01,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.2,
+    "delta": 0.05,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.2,
+    "delta": 0.1,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.2,
+    "delta": 0.3,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "ring",
+    "loss": 0.2,
+    "delta": 0.5,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.0,
+    "delta": 0.0,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.0,
+    "delta": 0.01,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.0,
+    "delta": 0.05,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.0,
+    "delta": 0.1,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.0,
+    "delta": 0.3,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.0,
+    "delta": 0.5,
+    "broadcasts_suppressed": 8,
+    "broadcast_opportunities": 100,
+    "actual_messages": 188,
+    "full_messages": 200,
+    "actual_message_savings_pct": 6.000000000000005
+  },
+  {
+    "topology": "grid",
+    "loss": 0.2,
+    "delta": 0.0,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.2,
+    "delta": 0.01,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.2,
+    "delta": 0.05,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 200,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "grid",
+    "loss": 0.2,
+    "delta": 0.1,
+    "broadcasts_suppressed": 1,
+    "broadcast_opportunities": 100,
+    "actual_messages": 199,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.5000000000000004
+  },
+  {
+    "topology": "grid",
+    "loss": 0.2,
+    "delta": 0.3,
+    "broadcasts_suppressed": 1,
+    "broadcast_opportunities": 100,
+    "actual_messages": 199,
+    "full_messages": 200,
+    "actual_message_savings_pct": 0.5000000000000004
+  },
+  {
+    "topology": "grid",
+    "loss": 0.2,
+    "delta": 0.5,
+    "broadcasts_suppressed": 6,
+    "broadcast_opportunities": 100,
+    "actual_messages": 190,
+    "full_messages": 200,
+    "actual_message_savings_pct": 5.000000000000004
+  },
+  {
+    "topology": "random",
+    "loss": 0.0,
+    "delta": 0.0,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.0,
+    "delta": 0.01,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.0,
+    "delta": 0.05,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.0,
+    "delta": 0.1,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.0,
+    "delta": 0.3,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.0,
+    "delta": 0.5,
+    "broadcasts_suppressed": 4,
+    "broadcast_opportunities": 100,
+    "actual_messages": 269,
+    "full_messages": 280,
+    "actual_message_savings_pct": 3.9285714285714257
+  },
+  {
+    "topology": "random",
+    "loss": 0.2,
+    "delta": 0.0,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.2,
+    "delta": 0.01,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.2,
+    "delta": 0.05,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.2,
+    "delta": 0.1,
+    "broadcasts_suppressed": 0,
+    "broadcast_opportunities": 100,
+    "actual_messages": 280,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.0
+  },
+  {
+    "topology": "random",
+    "loss": 0.2,
+    "delta": 0.3,
+    "broadcasts_suppressed": 1,
+    "broadcast_opportunities": 100,
+    "actual_messages": 278,
+    "full_messages": 280,
+    "actual_message_savings_pct": 0.7142857142857117
+  },
+  {
+    "topology": "random",
+    "loss": 0.2,
+    "delta": 0.5,
+    "broadcasts_suppressed": 5,
+    "broadcast_opportunities": 100,
+    "actual_messages": 270,
+    "full_messages": 280,
+    "actual_message_savings_pct": 3.57142857142857
+  }
+]

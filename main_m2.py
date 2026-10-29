@@ -94,16 +94,19 @@ def run_m2_experiment(
     """
     rounds = num_rounds if num_rounds is not None else cfg.num_rounds
     set_seed(cfg.seed)
+    for cid, loader in enumerate(train_loaders):
+        if loader.generator is not None:
+            loader.generator.manual_seed(cfg.seed + 1000 + cid)
 
     graph    = create_topology(topology_name, cfg.num_clients,
                                p=cfg.random_edge_prob, seed=cfg.seed)
     adjacency = get_adjacency_dict(graph)
     W         = get_mixing_matrix(graph)
     spectral_gap = get_spectral_gap(W)
-    param_bytes  = get_param_bytes(MNISTNet())
-
-    # Initialise clients with identical weights
-    ref_params = get_model_params(MNISTNet().to(device))
+    # Construct exactly one reference model, matching M1's random-number use.
+    reference_model = MNISTNet().to(device)
+    param_bytes = get_param_bytes(reference_model)
+    ref_params = get_model_params(reference_model)
     clients = []
     for i in range(cfg.num_clients):
         c = FLClient(
@@ -150,8 +153,8 @@ def run_m2_experiment(
         if delta == 0.0:
             aggregator.aggregate_round(rnd)
             # All clients always send to all neighbors
-            n_neighbors_per_client = len(adjacency.get(0, []))
-            total_triggered  += cfg.num_clients * n_neighbors_per_client
+            total_triggered += cfg.num_clients
+            trigger_history.append({"triggered": cfg.num_clients, "suppressed": 0})
         else:
             stats = aggregator.aggregate_round(rnd)
             total_triggered  += stats["triggered"]
@@ -175,6 +178,9 @@ def run_m2_experiment(
     suppression_rate = total_suppressed / max(1, total_triggered + total_suppressed)
 
     result = logger.get_final_summary(channel)
+    from dataclasses import asdict
+    result["config"] = asdict(cfg)
+    result["mean_drift"] = aggregator.mean_drift_history
     result.update({
         "delta"             : delta,
         "spectral_gap"      : spectral_gap,
@@ -182,8 +188,8 @@ def run_m2_experiment(
         "total_suppressed"  : total_suppressed,
         "suppression_rate"  : suppression_rate,
         "full_gossip_msgs"  : full_gossip_msgs,
-        "comm_reduction_pct": suppression_rate * 100.0,
-        "bytes_saved_pct"   : suppression_rate * 100.0,  # proportional
+        "comm_reduction_pct": 100.0 * (1 - total_tx_in_m1 / max(1, full_gossip_msgs)),
+        "bytes_saved_pct"   : 100.0 * (1 - total_bytes_sent / max(1, full_gossip_msgs * param_bytes)),
         "trigger_history"   : trigger_history,
     })
     return result
@@ -313,7 +319,7 @@ def generate_m2_plots(
                     and r["delta"] > 0.0]
     ring_results.sort(key=lambda x: x["delta"])
     # cmap = plt.cm.get_cmap("Reds", len(ring_results) + 2)
-    plt.colormaps.get_cmap("Reds").resampled(len(delta_values) + 2)
+    cmap = plt.colormaps.get_cmap("Reds").resampled(len(delta_values) + 2)
     for i, r in enumerate(ring_results):
         hist = r.get("trigger_history", [])
         if hist:
@@ -439,6 +445,9 @@ def main():
     )
     args = parser.parse_args()
     cfg = config_from_args(args)
+    global M2_RESULTS_DIR, M1_RESULTS_PATH
+    M2_RESULTS_DIR = os.path.join(cfg.results_dir, "m2")
+    M1_RESULTS_PATH = os.path.join(cfg.results_dir, "m1_all_results.json")
     delta_values = list(args.deltas) if args.deltas is not None else list(DEFAULT_DELTAS)
     topologies = cfg.topologies_to_test
     packet_loss_rates = cfg.packet_loss_rates_to_test

@@ -1,42 +1,9 @@
-"""
-main_m3.py — M3 Experiment Orchestrator: Spectral Gap Analysis.
+"""M3: ideal fixed-matrix spectral analysis; no neural-network training.
 
-PDF specification (Section 7 - M3):
-    "For each candidate topology (ring, grid, random graph), a row-stochastic
-     mixing matrix W is constructed and its eigenvalues computed, yielding the
-     spectral gap 1 - |lambda_2(W)|. This value feeds a theoretical convergence
-     bound, which is compared against the convergence rate and consensus error
-     observed empirically from a gossip simulation run on the same topology.
-     The validation step checks whether the predicted ordering and rate of
-     convergence across topologies matches what is actually observed, including
-     under the packet-loss and asynchrony conditions introduced in M1."
-
-What M3 produces:
-    1. Mixing matrix W and full eigenvalue spectrum for each topology
-    2. SLEM and spectral gap for ring / grid / random (n=5 nodes)
-    3. Theoretical convergence bound E_t = E_0 * SLEM^t
-    4. Empirical gossip simulation on the same topologies
-    5. Validation: does spectral ordering predict M1 convergence ordering?
-    6. Size sweep: spectral gap vs number of nodes
-    7. Mixing time heatmap across topologies and epsilon targets
-
-No model training required — M3 is pure graph/spectral analysis.
-
-Usage:
-    python main_m3.py                 # spectral analysis (no model training)
-    python main_m3.py --plot-only     # regenerate plots from saved JSON
-
-Output:
-    results/m3/m3_spectral_profiles.json
-    results/m3/m3_spectral_gap_bar.png
-    results/m3/m3_eigenvalue_spectrum.png
-    results/m3/m3_convergence_theoretical.png
-    results/m3/m3_convergence_empirical.png
-    results/m3/m3_theory_vs_empirical.png
-    results/m3/m3_spectral_gap_vs_size.png
-    results/m3/m3_mixing_time_heatmap.png
-    results/m3/m3_m1_validation.png          (only if M1 results exist)
-    results/m3/m3_report.md
+Signed eigenvalues are preserved. SLEM controls a squared-disagreement upper
+bound E(t) <= E(0) * SLEM**(2*t) for symmetric doubly stochastic averaging.
+Training with SGD, event suppression, directed losses, or stale messages is
+outside that proof. Optional M1 plots are descriptive comparisons only.
 """
 
 import os
@@ -63,7 +30,7 @@ from spectral_analysis import (
 M3_RESULTS_DIR  = "./results/m3"
 M1_RESULTS_PATH = "./results/m1_all_results.json"
 TOPOLOGIES      = ["ring", "grid", "random"]
-NODE_SIZES      = [4, 5, 8, 10, 16, 20]
+NODE_SIZES      = [5, 20, 50]
 SIM_ROUNDS      = 60
 EPSILON_TARGETS = [1e-2, 1e-3, 1e-4, 1e-6]
 TOPO_COLORS     = {"ring": "steelblue", "grid": "seagreen", "random": "coral"}
@@ -116,7 +83,7 @@ def generate_m3_plots(profiles: list, size_sweep: list, m1_results: list,
     # ── 2. Full eigenvalue spectrum
     fig, ax = plt.subplots(figsize=(9, 5))
     for p in main_profiles:
-        evals = sorted(np.array(p["all_eigenvalues"]), reverse=True)
+        evals = np.abs(p["all_eigenvalues"])
         color = TOPO_COLORS.get(p["topology"], "gray")
         ax.plot(evals, "o-", color=color, label=p["topology"].capitalize(),
                 linewidth=2, markersize=6)
@@ -144,7 +111,7 @@ def generate_m3_plots(profiles: list, size_sweep: list, m1_results: list,
         ax.semilogy(rounds, curve, color=color, linewidth=2.5, label=label)
     ax.set_xlabel("Gossip Round", fontsize=11)
     ax.set_ylabel("Consensus Error (log scale)", fontsize=11)
-    ax.set_title(f"M3: Theoretical Convergence Bound E_t = E₀ · SLEM^t\n(n={cfg.num_clients})",
+    ax.set_title(f"M3: Theoretical Convergence Bound B_t = E₀ · SLEM^(2t)\n(n={cfg.num_clients})",
                  fontsize=13)
     ax.legend(fontsize=9)
     ax.grid(True, alpha=0.3, which="both")
@@ -157,7 +124,7 @@ def generate_m3_plots(profiles: list, size_sweep: list, m1_results: list,
     fig, ax = plt.subplots(figsize=(9, 5))
     for p in main_profiles:
         graph = create_topology(p["topology"], p["n_nodes"],
-                                p=0.5, seed=42)
+                                p=cfg.random_edge_prob, seed=cfg.seed)
         W     = get_mixing_matrix(graph)
         emp   = simulate_gossip_consensus(W, SIM_ROUNDS)
         color = TOPO_COLORS.get(p["topology"], "gray")
@@ -180,7 +147,7 @@ def generate_m3_plots(profiles: list, size_sweep: list, m1_results: list,
     if len(main_profiles) == 1:
         axes = [axes]
     for ax, p in zip(axes, main_profiles):
-        graph = create_topology(p["topology"], p["n_nodes"], p=0.5, seed=42)
+        graph = create_topology(p["topology"], p["n_nodes"], p=cfg.random_edge_prob, seed=cfg.seed)
         W     = get_mixing_matrix(graph)
         emp   = simulate_gossip_consensus(W, SIM_ROUNDS)
         # normalise theory to match empirical starting point
@@ -191,7 +158,7 @@ def generate_m3_plots(profiles: list, size_sweep: list, m1_results: list,
         ax.semilogy(rounds, emp,    color=color, linewidth=2.5,
                     label="Empirical simulation")
         ax.semilogy(rounds, theory, color="black", linewidth=1.5,
-                    linestyle="--", label=f"Theory: E₀·SLEM^t")
+                    linestyle="--", label=f"Theory: E₀·SLEM^(2t)")
         ax.set_title(f"{p['topology'].capitalize()}\n"
                      f"γ={p['spectral_gap']:.4f}  SLEM={p['slem']:.4f}")
         ax.set_xlabel("Round")
@@ -289,7 +256,7 @@ def generate_m3_plots(profiles: list, size_sweep: list, m1_results: list,
 
         axes[0].set_xlabel("Spectral Gap γ", fontsize=11)
         axes[0].set_ylabel("Final M1 Test Accuracy", fontsize=11)
-        axes[0].set_title("Spectral Gap vs M1 Accuracy\n(validates theory: higher γ → better)")
+        axes[0].set_title("Spectral Gap vs M1 Accuracy\n(descriptive comparison only)")
         axes[0].legend(fontsize=8)
         axes[0].grid(True, alpha=0.3)
 
@@ -309,10 +276,10 @@ def generate_m3_plots(profiles: list, size_sweep: list, m1_results: list,
         axes[1].set_xlabel("Spectral Gap γ", fontsize=11)
         axes[1].set_ylabel("Final M1 Consensus Error (log)", fontsize=11)
         axes[1].set_yscale("log")
-        axes[1].set_title("Spectral Gap vs M1 Consensus Error\n(validates: higher γ → lower error)")
+        axes[1].set_title("Spectral Gap vs M1 Consensus Error\n(local SGD and channel effects also matter)")
         axes[1].grid(True, alpha=0.3, which="both")
 
-        plt.suptitle("M3: Spectral Gap Validation Against M1 Results", fontsize=13)
+        plt.suptitle("M3: Descriptive Spectral Comparison with M1", fontsize=13)
         plt.tight_layout()
         plt.savefig(os.path.join(M3_RESULTS_DIR, "m3_m1_validation.png"), dpi=150)
         plt.close()
@@ -331,7 +298,7 @@ def generate_report(profiles: list, size_sweep: list, m1_results: list,
     lines.append("---\n\n")
     lines.append("## 1. Spectral Properties\n\n")
     lines.append("| Topology | Nodes | Edges | Avg Degree | "
-                 "Spectral Gap γ | SLEM |λ₂(W)| | "
+                 "Spectral Gap γ | SLEM ρ | "
                  "T_mix(10⁻²) | T_mix(10⁻³) | T_mix(10⁻⁶) |\n")
     lines.append("|----------|-------|-------|------------|"
                  "----------------|-------------|"
@@ -368,11 +335,11 @@ def generate_report(profiles: list, size_sweep: list, m1_results: list,
     lines.append("## 3. Theoretical Background\n\n")
     lines.append("**Spectral gap:** γ = 1 − |λ₂(W)|\n\n")
     lines.append("**SLEM** = Second Largest Eigenvalue Modulus = |λ₂(W)|\n\n")
-    lines.append("**Convergence bound:** E_t = E₀ · SLEM^t\n\n")
-    lines.append("**Mixing time:** T_mix(ε) = log(1/ε) / log(1/SLEM)\n\n")
+    lines.append("**Squared-error upper bound (ideal fixed averaging only):** E_t <= B_t = E₀ · SLEM^(2t)\n\n")
+    lines.append("**Mixing time:** T_mix(ε) = ceil(log(1/ε) / (2 log(1/SLEM))) for relative squared error\n\n")
 
     if m1_results:
-        lines.append("## 4. Validation Against M1\n\n")
+        lines.append("## 4. Descriptive Comparison Against M1\n\n")
         lines.append("| Topology | PLR | Spectral Gap γ | M1 Final Acc | M1 Consensus Err |\n")
         lines.append("|----------|-----|----------------|-------------|------------------|\n")
         for r in sorted(m1_results, key=lambda x: (x["topology"], x["packet_loss_rate"])):
@@ -433,6 +400,9 @@ def main():
     parser = build_arg_parser("M3: Spectral-gap analysis of mixing matrices")
     args = parser.parse_args()
     cfg = config_from_args(args)
+    global M3_RESULTS_DIR, M1_RESULTS_PATH
+    M3_RESULTS_DIR = os.path.join(cfg.results_dir, "m3")
+    M1_RESULTS_PATH = os.path.join(cfg.results_dir, "m1_all_results.json")
     topologies = cfg.topologies_to_test
     os.makedirs(M3_RESULTS_DIR, exist_ok=True)
 
@@ -491,7 +461,7 @@ def main():
         print(f"\n--- Phase 3: Loading M1 results for validation ---")
         print(f"  Loaded {len(m1_results)} M1 experiments")
         # Verify spectral ordering matches M1 ordering
-        print("\n  Validating: spectral gap ordering vs M1 convergence ordering:")
+        print("\n  Comparing ideal spectral gaps with observed M1 errors (not a theorem validation):")
         print(f"  {'Topology':<10} {'Spec.Gap':<12} {'M1 ConsErr(PLR=0)'}")
         for p in sorted(main_profiles, key=lambda x: x["spectral_gap"], reverse=True):
             m1r = next((r for r in m1_results

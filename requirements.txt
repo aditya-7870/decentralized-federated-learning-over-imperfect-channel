@@ -1,5 +1,6 @@
-torch
-torchvision
-numpy
-networkx
-matplotlib
+torch==2.14.1
+torchvision==0.29.1
+numpy==2.5.4
+networkx==3.7
+matplotlib==3.11.2
+scipy==1.18.1

@@ -56,7 +56,7 @@ class Config:
     )
 
     # ── Output ───────────────────────────────────────────────────────────
-    results_dir: str = "./results"
+    results_dir: str = "./results/revised"
     save_plots: bool = True
 
     def __post_init__(self):
@@ -141,6 +141,11 @@ def config_from_args(args: argparse.Namespace) -> Config:
         cfg.random_edge_prob = args.edge_prob
     if args.no_plots:
         cfg.save_plots = False
+    cfg.__post_init__()
+    if cfg.num_rounds <= 0 or cfg.local_epochs <= 0 or cfg.batch_size <= 0:
+        raise ValueError("Rounds, epochs and batch size must be positive")
+    if any(not 0 <= v <= 1 for v in cfg.packet_loss_rates_to_test):
+        raise ValueError("Loss rates must be in [0, 1]")
     return cfg
 
 

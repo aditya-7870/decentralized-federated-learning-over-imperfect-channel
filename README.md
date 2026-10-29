@@ -1,139 +1,108 @@
-# Decentralized Federated Learning Over Imperfect Channels
+# Decentralized learning over lossy links
 
-Python/PyTorch simulator for **gossip-based decentralized FL** when links drop packets, delay updates, and topologies mix information at different speeds.
+Reproducible Computer Networks project: local-only training, standard gossip (M1), event-triggered gossip (M2), and ideal spectral analysis (M3).
 
-This repository implements the three methodologies from the project report. **Training is left to you** — run the commands below on your machine (GPU recommended for M1 and M2). M3 does not train a neural network.
+## Review on another laptop
 
-## What each stage does
+**No training or GPU is needed to show the completed work.**
 
-| Stage | File | Trains a CNN? | Goal |
-|-------|------|---------------|------|
-| **M1** | `main.py` | Yes | Gossip FL on ring / grid / random graphs under packet loss and optional async delay |
-| **M2** | `main_m2.py` | Yes | Event-triggered gossip: send only if \(\\|w(t)-w_{\text{last}}\\|_2 > \delta\) |
-| **M3** | `main_m3.py` | No | Mixing-matrix eigenvalues, spectral gap, mixing time, theory vs gossip simulation |
-
-```mermaid
-flowchart LR
-  subgraph M1["M1 Gossip FL"]
-    LocalSGD[Local SGD] --> Gossip[Neighbor averaging]
-    Channel[Packet loss + delay] --> Gossip
-  end
-  subgraph M2["M2 Event-triggered"]
-    Detector[Change detector delta] --> Tx{Transmit?}
-    Tx -->|yes| Gossip2[Async neighbor merge]
-    Tx -->|no| Silent[Suppress send]
-  end
-  subgraph M3["M3 Spectral analysis"]
-    W[Mixing matrix W] --> Gap["Gap = 1 - |λ2|"]
-    Gap --> Bound[E_t = E0 · SLEM^t]
-  end
-  M1 --> M2
-  M1 --> M3
-```
-
-## Setup
+1. Open `output/report/Team21_Revised_Decentralized_Learning_Report.docx` in Word.
+2. Open the figures in `results/review/figures/` and `results/review/m3/`.
+3. Run the saved-results viewer with any compatible Python:
 
 ```powershell
-cd E:\Decentralized_Federated_Learning_Over_Imperfect_Channels
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+python demo.py
 ```
 
-MNIST downloads automatically into `./data` on first run.
-
-## How you should train
-
-Default sweep (5 clients, 20 rounds, 2 local epochs, IID MNIST, ring+grid+random, packet loss 0.0 and 0.2):
+That command uses only the standard library. For CPU inference, use 64-bit Python 3.14 (the tested version), then:
 
 ```powershell
-python main.py
-python main_m2.py
-python main_m3.py
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+.\.venv\Scripts\python.exe demo.py --predict
 ```
 
-Or through the wrapper:
+The inference command loads `demo_assets/mnist_demo.pt` onto the CPU and predicts twenty included test digits. It does not download data or retrain. The checkpoint contains client 0 from the seed-42 IID Ring run, not an ensemble or the best model selected from all seeds.
+
+## Reproduce the experiments
+
+The tested training environment is Python 3.14, PyTorch 2.14.1+cu130, TorchVision 0.29.1+cu130, and an RTX 5070 Ti Laptop GPU. The NVIDIA driver must support the selected CUDA wheel. CPU execution is supported but slower.
 
 ```powershell
-python run.py m1
-python run.py m2
-python run.py m3
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cu130
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe experiments.py --suite smoke --output .work/smoke
+.\.venv\Scripts\python.exe experiments.py --suite all
+.\.venv\Scripts\python.exe loss_topology_experiments.py
+.\.venv\Scripts\python.exe original_budget_experiments.py
+.\.venv\Scripts\python.exe cifar_experiments.py
+.\.venv\Scripts\python.exe summarize_results.py
+.\.venv\Scripts\python.exe main_m3.py --results-dir results/review
+.\.venv\Scripts\python.exe make_report_figures.py
 ```
 
-Smaller first run (recommended to check the GPU path):
+MNIST and CIFAR-10 download into `data/` on first use. Internet access is required for installation and first dataset download only. The main suite uses the full MNIST training and test sets, not a sampled subset.
+
+### Experiment suites
+
+- `smoke`: one-round M1 versus zero-threshold M2, for implementation validation.
+- `core`: 60 runs = five seeds × three partitions × four methods (local, Ring, Grid, Random).
+- `extended`: core plus fixed event thresholds, delay, Bernoulli loss, and burst loss = 105 runs.
+- `all`: extended plus N=20/50 two-class Ring/Grid learning = 125 runs.
+- `loss_topology_experiments.py`: ten more MNIST runs completing the 20% loss comparison on Grid and Random.
+- `original_budget_experiments.py`: ten matched IID local-only/Ring runs at the original 20-round, two-local-epoch, batch-64 budget.
+- `cifar_experiments.py`: ten additional runs = five seeds × local-only/Ring on Dirichlet CIFAR-10.
+
+Core and impairment runs use ten rounds, one local epoch, batch size 128, learning rate .01, and local SGD momentum .9. The separately labeled original-budget control uses twenty rounds, two epochs, and batch size 64. A run-level restart skips complete JSON files. It does not resume an interrupted optimizer state. Delete or move a condition's JSON deliberately if you want to repeat that condition; use a new output folder when changing the protocol.
+
+## Scientific interpretation
+
+- Reported accuracy is the mean of individual client test accuracies. It is not the accuracy of a central average or an ensemble.
+- The two-class partition is exactly two labels/client; Dirichlet alpha=.1 is a separate setting. Partitions are disjoint and cover all samples.
+- The objective weights clients uniformly. This differs from pooled sample weighting for unequal client data sizes. Optimizer momentum remains local after model mixing.
+- A complete float32 model is one application message. Byte totals exclude packet headers, fragmentation, retransmissions, and energy.
+- Broadcast suppression uses clients × rounds; actual traffic savings use directed neighbor messages. The original Grid's reported 8% broadcast suppression is 6% message/byte savings (188 versus 200 attempts).
+- Erasures with receiver renormalization can change the model mean. Aggregation-induced drift is measured explicitly.
+- Gilbert-Elliott has transitions pGB=.05 and pBG=.2, erasure probabilities 0/1, stationary loss .2, and mean bad burst five rounds. It is initialized in stationarity.
+- Delayed messages carry source-round versions. Older arrivals cannot overwrite newer accepted models. Arrivals beyond the last training round remain pending.
+- M3's `E(t) <= E(0) * rho**(2*t)` is a squared-disagreement bound for fixed symmetric ideal averaging. It is not a convergence guarantee for SGD with losses or delay.
+- Confidence intervals use Student t across seed-level results. Paired gains are computed within seeds. Five seeds do not establish universal superiority.
+
+## Files and outputs
+
+| Path | Purpose |
+|---|---|
+| `experiments.py` | Recommended reproducible MNIST experiment runner |
+| `cifar_experiments.py` | Harder-task extension using the same engine |
+| `channel.py` | Independent/burst erasures, delay buffer, arrival accounting |
+| `gossip.py` / `gossip_event_triggered.py` | Shared receiver path and sender thresholds |
+| `dataset.py` | IID, shard, exact two-class, Dirichlet partition utilities |
+| `model.py` / `client.py` | CNNs, local SGD, model serialization |
+| `main.py` / `main_m2.py` | Original configurable M1/M2 entry points, with fixes |
+| `main_m3.py` / `spectral_analysis.py` | Signed spectra and ideal averaging analysis |
+| `summarize_results.py` | Seed statistics, paired gains, and new figures |
+| `results/review/runs/` | Complete revised run records |
+| `results/review/summary.json` | Recomputed statistics used by report |
+| `results/review/validation.json` | Validation provenance |
+| `results/review/legacy_accounting_audit.json` | Recalculated original message savings |
+| `demo_assets/` | Tracked portable checkpoint and prediction illustration |
+| `output/report/` | Revised editable report |
+| `HANDOVER.md` | Review-day commands and explanation |
+
+Original report PDFs and original `results/*.json` / `results/m2/` remain historical evidence. The corrected legacy CLI defaults to `results/revised/` to avoid overwriting those files. Its results have a different schema from the new review suite.
+
+## Validation
 
 ```powershell
-python main.py --topologies ring --packet-loss 0.0 --num-rounds 5 --local-epochs 1
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Asynchrony and non-IID (report scope; optional extra experiments):
+Tests cover the scientific correctness issues, including the real M1/M2 entry points under loss and delay. `validate_gpu_equivalence.py` additionally repeats five full-budget GPU zero-threshold runs and compares parameter hashes with M1. Run `validate_results.py` to audit saved-run accounting and data-coverage invariants.
 
-```powershell
-python main.py --async-delay 0 2 --packet-loss 0.0 0.2
-python main.py --non-iid
-```
+## Report source
 
-M2 threshold sweep:
+`tools/build_report.py` creates the Word report from five-seed summary data using `python-docx`. Keep `tools/report_sections.py` and `report_sources/` alongside it: they contain the expanded literature review, research-gap discussion, verified bibliography, and reference audit. The report includes all 30 supplied literature references plus FedAvg and dataset sources, numbered by first citation. It was authored with the Codex bundled document runtime. To regenerate on another machine, install `python-docx`, run the figure/statistics commands first, and then run this script. `tools/render_report_word.ps1` provides a Windows Word PDF export for visual QA; it needs Microsoft Word. QA renders and temporary environments are excluded from Git.
 
-```powershell
-python main_m2.py --deltas 0.0 0.05 0.1 --topologies ring --packet-loss 0.0
-```
-
-## Plot without training
-
-After JSON files exist under `results/`:
-
-```powershell
-python main.py --plot-only
-python main_m2.py --plot-only
-python main_m3.py --plot-only
-# or:
-python run.py plots
-```
-
-`--plot-only` never starts SGD. M3 never trains even without that flag.
-
-## Shared CLI flags
-
-| Flag | Meaning |
-|------|---------|
-| `--num-clients` | Virtual devices (default 5) |
-| `--num-rounds` | Gossip rounds (default 20) |
-| `--local-epochs` | SGD epochs per round (default 2) |
-| `--lr` / `--batch-size` / `--seed` | Training / reproducibility |
-| `--topologies ring grid random` | Which graphs to sweep |
-| `--packet-loss 0.0 0.2` | Drop probabilities |
-| `--async-delay 0 2` | Max extra rounds a surviving packet may wait |
-| `--non-iid` | Two-shard label partition |
-| `--plot-only` | JSON → PNG only |
-| `--no-plots` | Train / analyze but skip PNGs |
-| `--results-dir` | Output folder (default `./results`) |
-
-## Project layout
-
-| File | Role |
-|------|------|
-| `config.py` | Hyperparameters + CLI |
-| `model.py` | Lightweight MNIST CNN + flatten/unflatten weights |
-| `dataset.py` | IID / non-IID MNIST loaders |
-| `client.py` | Local SGD (AMP on CUDA) |
-| `network.py` | Ring / grid / Erdős–Rényi graphs, Metropolis–Hastings \(W\) |
-| `channel.py` | Packet loss, delay buffer, byte accounting |
-| `gossip.py` | Always-on neighbor averaging (M1) |
-| `gossip_event_triggered.py` | Thresholded transmissions (M2) |
-| `metrics.py` | Accuracy, consensus error \(\frac{1}{N}\sum_i \|w_i-\bar w\|^2\), communication plots |
-| `spectral_analysis.py` | SLEM, gap, mixing time, scalar gossip simulation (M3) |
-
-## Outputs
-
-- M1: `results/*.json`, `results/m1_all_results.json`, accuracy / consensus / communication PNGs, checkpoints under `results/checkpoints/`
-- M2: `results/m2/m2_all_results.json` and comparison PNGs
-- M3: `results/m3/m3_spectral_profiles.json`, `results/m3/m3_report.md`, spectral PNGs (plus `m3_m1_validation.png` if M1 JSON exists)
-
-## Metrics
-
-- **Test accuracy / loss** — each client evaluated on the shared MNIST test set
-- **Consensus error** — mean squared distance of client weights from the mean weight vector
-- **Communication cost** — messages attempted / dropped / delayed and bytes
-- **Packet-loss tolerance** — same topology at PLR = 0.0 vs 0.2
-- **Spectral gap** — \(1-|\lambda_2(W)|\); larger gap ⇒ faster mixing
+Before pushing, include `results/review/`, `demo_assets/`, `output/report/`, `report_sources/`, `tools/`, tests, requirements, source files, and documentation. Keep the original PDF reports and teacher correction documents too. `data/`, `.venv/`, `.work/`, internal QA renders, bulk legacy checkpoints, and extra local training output folders are intentionally ignored. Do not add the downloaded datasets or environment to Git. Follow `HANDOVER.md` for the review-day sequence and GitHub transfer checklist.

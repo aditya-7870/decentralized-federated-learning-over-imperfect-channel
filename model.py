@@ -20,7 +20,7 @@ class MNISTNet(nn.Module):
     Architecture:
         Conv(1→16, 3×3) → ReLU → MaxPool(2)
         Conv(16→32, 3×3) → ReLU → MaxPool(2)
-        FC(32*5*5 → 128) → ReLU
+        FC(32*7*7 → 128) → ReLU
         FC(128 → 10)
     """
 
@@ -56,6 +56,8 @@ def set_model_params(model: nn.Module, flat_params: torch.Tensor) -> None:
     The tensor is split according to each parameter's original shape
     and loaded in the same order as ``model.parameters()``.
     """
+    if flat_params.numel() != sum(p.numel() for p in model.parameters()):
+        raise ValueError("Parameter vector length does not match model architecture")
     offset = 0
     for p in model.parameters():
         numel = p.numel()
@@ -71,3 +73,11 @@ def get_param_count(model: nn.Module) -> int:
 def get_param_bytes(model: nn.Module) -> int:
     """Return the size in bytes of the flat parameter vector (float32)."""
     return get_param_count(model) * 4  # 4 bytes per float32
+
+
+class CIFARNet(MNISTNet):
+    """Same two-convolution design for 32x32 RGB CIFAR-10 images."""
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
+        self.fc1 = nn.Linear(32 * 8 * 8, 128)

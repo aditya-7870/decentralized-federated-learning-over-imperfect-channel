@@ -216,7 +216,7 @@ class MetricsLogger:
             labels.append(f"{r['topology']}\nloss={r['packet_loss_rate']}{delay_tag}")
             total = r["total_communication"]
             attempted.append(total["attempted"])
-            delivered.append(total["delivered_immediate"] + total.get("delayed", 0))
+            delivered.append(total.get("delivered", total["delivered_immediate"] + total.get("delayed", 0)))
 
         x = np.arange(len(labels))
         width = 0.35

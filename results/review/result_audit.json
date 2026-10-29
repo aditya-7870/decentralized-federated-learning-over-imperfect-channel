@@ -1,0 +1,15 @@
+{
+  "completed_runs_audited": 155,
+  "failures": [],
+  "checks": [
+    "training/class coverage",
+    "exact two-label partitions",
+    "attempt/drop/arrival/pending conservation",
+    "byte accounting",
+    "graph denominator",
+    "zero local traffic",
+    "complete gossip traffic",
+    "round and accuracy consistency",
+    "finite metrics"
+  ]
+}

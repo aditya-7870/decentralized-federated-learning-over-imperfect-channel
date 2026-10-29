@@ -1,0 +1,344 @@
+{
+  "r1": {
+    "authors": "Xiao, L., Boyd, S.",
+    "title": "Fast linear iterations for distributed averaging",
+    "venue": "Systems & Control Letters",
+    "year": 2004,
+    "volume": "53",
+    "issue": "1",
+    "pages": "65-78",
+    "doi": "10.1016/j.sysconle.2004.02.022",
+    "url": "https://doi.org/10.1016/j.sysconle.2004.02.022"
+  },
+  "r2": {
+    "authors": "Boyd, S., Ghosh, A., Prabhakar, B., Shah, D.",
+    "title": "Randomized gossip algorithms",
+    "venue": "IEEE Transactions on Information Theory",
+    "year": 2006,
+    "volume": "52",
+    "issue": "6",
+    "pages": "2508-2530",
+    "doi": "10.1109/tit.2006.874516",
+    "url": "https://doi.org/10.1109/tit.2006.874516"
+  },
+  "r3": {
+    "authors": "Lian, X., Zhang, C., Zhang, H., Hsieh, C.-J., Zhang, W., Liu, J.",
+    "title": "Can Decentralized Algorithms Outperform Centralized Algorithms? A Case Study for Decentralized Parallel Stochastic Gradient Descent",
+    "venue": "Advances in Neural Information Processing Systems 30",
+    "year": 2017,
+    "doi": null,
+    "url": "https://arxiv.org/abs/1705.09056"
+  },
+  "r4": {
+    "authors": "Nedić, A., Olshevsky, A., Rabbat, M.G.",
+    "title": "Network Topology and Communication-Computation Tradeoffs in Decentralized Optimization",
+    "venue": "Proceedings of the IEEE",
+    "year": 2018,
+    "volume": "106",
+    "issue": "5",
+    "pages": "953-976",
+    "doi": "10.1109/jproc.2018.2817461",
+    "url": "https://doi.org/10.1109/jproc.2018.2817461"
+  },
+  "r5": {
+    "authors": "Koloskova, A., Stich, S.U., Jaggi, M.",
+    "title": "Decentralized Stochastic Optimization and Gossip Algorithms with Compressed Communication",
+    "venue": "Proceedings of the 36th International Conference on Machine Learning, PMLR 97, 3478-3487",
+    "year": 2019,
+    "doi": null,
+    "url": "https://proceedings.mlr.press/v97/koloskova19a.html"
+  },
+  "r6": {
+    "authors": "Hegedűs, I., Danner, G., Jelasity, M.",
+    "title": "Gossip Learning as a Decentralized Alternative to Federated Learning",
+    "venue": "Lecture Notes in Computer Science",
+    "year": 2019,
+    "volume": null,
+    "issue": null,
+    "pages": "74-90",
+    "doi": "10.1007/978-3-030-22496-7_5",
+    "url": "https://doi.org/10.1007/978-3-030-22496-7_5"
+  },
+  "r7": {
+    "authors": "Savazzi, S., Nicoli, M., Rampa, V.",
+    "title": "Federated Learning With Cooperating Devices: A Consensus Approach for Massive IoT Networks",
+    "venue": "IEEE Internet of Things Journal",
+    "year": 2020,
+    "volume": "7",
+    "issue": "5",
+    "pages": "4641-4654",
+    "doi": "10.1109/jiot.2020.2964162",
+    "url": "https://doi.org/10.1109/jiot.2020.2964162"
+  },
+  "r8": {
+    "authors": "Xing, H., Simeone, O., Bi, S.",
+    "title": "Federated Learning Over Wireless Device-to-Device Networks: Algorithms and Convergence Analysis",
+    "venue": "IEEE Journal on Selected Areas in Communications",
+    "year": 2021,
+    "volume": "39",
+    "issue": "12",
+    "pages": "3723-3741",
+    "doi": "10.1109/jsac.2021.3118400",
+    "url": "https://doi.org/10.1109/jsac.2021.3118400"
+  },
+  "r9": {
+    "authors": "Chen, M., Gündüz, D., Huang, K., Saad, W., Bennis, M., Feljan, A.V., Poor, H.V.",
+    "title": "Distributed Learning in Wireless Networks: Recent Progress and Future Challenges",
+    "venue": "IEEE Journal on Selected Areas in Communications",
+    "year": 2021,
+    "volume": "39",
+    "issue": "12",
+    "pages": "3579-3605",
+    "doi": "10.1109/jsac.2021.3118346",
+    "url": "https://doi.org/10.1109/jsac.2021.3118346"
+  },
+  "r10": {
+    "authors": "Ye, H., Liang, L., Li, G.Y.",
+    "title": "Decentralized Federated Learning With Unreliable Communications",
+    "venue": "IEEE Journal of Selected Topics in Signal Processing",
+    "year": 2022,
+    "volume": "16",
+    "issue": "3",
+    "pages": "487-500",
+    "doi": "10.1109/jstsp.2022.3152445",
+    "url": "https://doi.org/10.1109/jstsp.2022.3152445"
+  },
+  "r11": {
+    "authors": "Jiang, Z., Yu, G., Cai, Y., Jiang, Y.",
+    "title": "Decentralized Edge Learning via Unreliable Device-to-Device Communications",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "year": 2022,
+    "volume": "21",
+    "issue": "11",
+    "pages": "9041-9055",
+    "doi": "10.1109/twc.2022.3172147",
+    "url": "https://doi.org/10.1109/twc.2022.3172147"
+  },
+  "r12": {
+    "authors": "Chen, S., Yu, D., Zou, Y., Yu, J., Cheng, X.",
+    "title": "Decentralized Wireless Federated Learning With Differential Privacy",
+    "venue": "IEEE Transactions on Industrial Informatics",
+    "year": 2022,
+    "volume": "18",
+    "issue": "9",
+    "pages": "6273-6282",
+    "doi": "10.1109/tii.2022.3145010",
+    "url": "https://doi.org/10.1109/tii.2022.3145010"
+  },
+  "r13": {
+    "authors": "Tang, Z., Shi, S., Li, B., Chu, X.",
+    "title": "GossipFL: A Decentralized Federated Learning Framework With Sparsified and Adaptive Communication",
+    "venue": "IEEE Transactions on Parallel and Distributed Systems",
+    "year": 2023,
+    "volume": "34",
+    "issue": "3",
+    "pages": "909-922",
+    "doi": "10.1109/tpds.2022.3230938",
+    "url": "https://doi.org/10.1109/tpds.2022.3230938"
+  },
+  "r14": {
+    "authors": "Li, W., Lv, T., Ni, W., Zhao, J., Hossain, E., Poor, H.V.",
+    "title": "Decentralized Federated Learning Over Imperfect Communication Channels",
+    "venue": "IEEE Transactions on Communications",
+    "year": 2024,
+    "volume": "72",
+    "issue": "11",
+    "pages": "6973-6991",
+    "doi": "10.1109/tcomm.2024.3407208",
+    "url": "https://doi.org/10.1109/tcomm.2024.3407208"
+  },
+  "r15": {
+    "authors": "Yang, H.H., Liu, Z., Quek, T.Q.S., Poor, H.V.",
+    "title": "Scheduling Policies for Federated Learning in Wireless Networks",
+    "venue": "IEEE Transactions on Communications",
+    "year": 2020,
+    "volume": "68",
+    "issue": "1",
+    "pages": "317-333",
+    "doi": "10.1109/tcomm.2019.2944169",
+    "url": "https://doi.org/10.1109/tcomm.2019.2944169"
+  },
+  "r16": {
+    "authors": "Salehi, M., Hossain, E.",
+    "title": "Federated Learning in Unreliable and Resource-Constrained Cellular Wireless Networks",
+    "venue": "IEEE Transactions on Communications",
+    "year": 2021,
+    "volume": "69",
+    "issue": "8",
+    "pages": "5136-5151",
+    "doi": "10.1109/tcomm.2021.3081746",
+    "url": "https://doi.org/10.1109/tcomm.2021.3081746"
+  },
+  "r17": {
+    "authors": "Xu, C., Liu, S., Yang, Z., Huang, Y., Wong, K.-K.",
+    "title": "Learning Rate Optimization for Federated Learning Exploiting Over-the-Air Computation",
+    "venue": "IEEE Journal on Selected Areas in Communications",
+    "year": 2021,
+    "volume": "39",
+    "issue": "12",
+    "pages": "3742-3756",
+    "doi": "10.1109/jsac.2021.3118402",
+    "url": "https://doi.org/10.1109/jsac.2021.3118402"
+  },
+  "r18": {
+    "authors": "Amiri, M.M., Gündüz, D., Kulkarni, S.R., Poor, H.V.",
+    "title": "Convergence of Federated Learning Over a Noisy Downlink",
+    "venue": "IEEE Transactions on Wireless Communications",
+    "year": 2022,
+    "volume": "21",
+    "issue": "3",
+    "pages": "1422-1437",
+    "doi": "10.1109/twc.2021.3103874",
+    "url": "https://doi.org/10.1109/twc.2021.3103874"
+  },
+  "r19": {
+    "authors": "Li, Z., Zhou, Y., Wu, D., Tang, T., Wang, R.",
+    "title": "Fairness-Aware Federated Learning With Unreliable Links in Resource-Constrained Internet of Things",
+    "venue": "IEEE Internet of Things Journal",
+    "year": 2022,
+    "volume": "9",
+    "issue": "18",
+    "pages": "17359-17371",
+    "doi": "10.1109/jiot.2022.3156046",
+    "url": "https://doi.org/10.1109/jiot.2022.3156046"
+  },
+  "r20": {
+    "authors": "Wei, X., Shen, C.",
+    "title": "Federated Learning Over Noisy Channels: Convergence Analysis and Design Examples",
+    "venue": "IEEE Transactions on Cognitive Communications and Networking",
+    "year": 2022,
+    "volume": "8",
+    "issue": "2",
+    "pages": "1253-1268",
+    "doi": "10.1109/tccn.2022.3140788",
+    "url": "https://doi.org/10.1109/tccn.2022.3140788"
+  },
+  "r21": {
+    "authors": "Imteaj, A., Thakker, U., Wang, S., Li, J., Amini, M.H.",
+    "title": "A Survey on Federated Learning for Resource-Constrained IoT Devices",
+    "venue": "IEEE Internet of Things Journal",
+    "year": 2022,
+    "volume": "9",
+    "issue": "1",
+    "pages": "1-24",
+    "doi": "10.1109/jiot.2021.3095077",
+    "url": "https://doi.org/10.1109/jiot.2021.3095077"
+  },
+  "r22": {
+    "authors": "Liu, W., Chen, L., Zhang, W.",
+    "title": "Decentralized Federated Learning: Balancing Communication and Computing Costs",
+    "venue": "IEEE Transactions on Signal and Information Processing over Networks",
+    "year": 2022,
+    "volume": "8",
+    "issue": null,
+    "pages": "131-143",
+    "doi": "10.1109/tsipn.2022.3151242",
+    "url": "https://doi.org/10.1109/tsipn.2022.3151242"
+  },
+  "r23": {
+    "authors": "Martínez Beltrán, E.T., Quiles Pérez, M., Sánchez Sánchez, P.M., López Bernal, S., Bovet, G., Gil Pérez, M., Martínez Pérez, G., Huertas Celdrán, A.",
+    "title": "Decentralized Federated Learning: Fundamentals, State of the Art, Frameworks, Trends, and Challenges",
+    "venue": "IEEE Communications Surveys & Tutorials",
+    "year": 2023,
+    "volume": "25",
+    "issue": "4",
+    "pages": "2983-3013",
+    "doi": "10.1109/comst.2023.3315746",
+    "url": "https://doi.org/10.1109/comst.2023.3315746"
+  },
+  "r24": {
+    "authors": "Yuan, L., Wang, Z., Sun, L., Yu, P.S., Brinton, C.G.",
+    "title": "Decentralized Federated Learning: A Survey and Perspective",
+    "venue": "IEEE Internet of Things Journal",
+    "year": 2024,
+    "volume": "11",
+    "issue": "21",
+    "pages": "34617-34638",
+    "doi": "10.1109/jiot.2024.3407584",
+    "url": "https://doi.org/10.1109/jiot.2024.3407584"
+  },
+  "r25": {
+    "authors": "Chung, W.-C., Lo, C.-A., Lin, Y.-H., Chen, Z.-H., Hung, C.-L.",
+    "title": "Decentralized Federated Learning with Non-IID Data: Challenges, Trends, and Future Opportunities",
+    "venue": "ACM Computing Surveys",
+    "year": 2026,
+    "volume": "58",
+    "issue": "8",
+    "pages": "1-41",
+    "doi": "10.1145/3785657",
+    "url": "https://doi.org/10.1145/3785657"
+  },
+  "r26": {
+    "authors": "Lalitha, A., Kilinc, O.C., Javidi, T., Koushanfar, F.",
+    "title": "Peer-to-peer Federated Learning on Graphs",
+    "venue": "arXiv preprint arXiv:1901.11173",
+    "year": 2019,
+    "doi": "10.48550/arXiv.1901.11173",
+    "url": "https://arxiv.org/abs/1901.11173"
+  },
+  "r27": {
+    "authors": "Sun, T., Li, D., Wang, B.",
+    "title": "Decentralized Federated Averaging",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+    "year": 2023,
+    "volume": "45",
+    "issue": "4",
+    "pages": "4289-4301",
+    "doi": "10.1109/tpami.2022.3196503",
+    "url": "https://doi.org/10.1109/tpami.2022.3196503"
+  },
+  "r28": {
+    "authors": "Gao, H., Thai, M.T., Wu, J.",
+    "title": "When Decentralized Optimization Meets Federated Learning",
+    "venue": "IEEE Network",
+    "year": 2023,
+    "volume": "37",
+    "issue": "5",
+    "pages": "233-239",
+    "doi": "10.1109/mnet.132.2200530",
+    "url": "https://doi.org/10.1109/mnet.132.2200530"
+  },
+  "r29": {
+    "authors": "Nguyen, M.N.H., Pandey, S.R., Dang, T.N., Huh, E.-N., Tran, N.H., Saad, W., Hong, C.S.",
+    "title": "Self-Organizing Democratized Learning: Toward Large-Scale Distributed Learning Systems",
+    "venue": "IEEE Transactions on Neural Networks and Learning Systems",
+    "year": 2023,
+    "volume": "34",
+    "issue": "12",
+    "pages": "10698-10710",
+    "doi": "10.1109/tnnls.2022.3170872",
+    "url": "https://doi.org/10.1109/tnnls.2022.3170872"
+  },
+  "r30": {
+    "authors": "Chen, D., Deng, T., Jia, J., Feng, S., Yuan, D.",
+    "title": "Mobility-aware decentralized federated learning with joint optimization of local iteration and leader selection for vehicular networks",
+    "venue": "Computer Networks",
+    "year": 2025,
+    "volume": "263",
+    "issue": null,
+    "pages": "111232",
+    "doi": "10.1016/j.comnet.2025.111232",
+    "url": "https://doi.org/10.1016/j.comnet.2025.111232"
+  },
+  "mcmahan": {
+    "authors": "McMahan, B., Moore, E., Ramage, D., Hampson, S., Aguera y Arcas, B.",
+    "title": "Communication-Efficient Learning of Deep Networks from Decentralized Data",
+    "venue": "AISTATS, PMLR 54, 1273-1282",
+    "year": 2017,
+    "url": "https://proceedings.mlr.press/v54/mcmahan17a.html"
+  },
+  "mnist": {
+    "authors": "LeCun, Y., Cortes, C., Burges, C. J. C.",
+    "title": "The MNIST database of handwritten digits",
+    "venue": "Dataset: 60,000 training and 10,000 test images",
+    "year": null,
+    "url": "https://www.tensorflow.org/datasets/catalog/mnist"
+  },
+  "cifar": {
+    "authors": "Krizhevsky, A.",
+    "title": "Learning Multiple Layers of Features from Tiny Images",
+    "venue": "University of Toronto technical report; CIFAR-10 dataset",
+    "year": 2009,
+    "url": "https://www.cs.toronto.edu/~kriz/cifar.html"
+  }
+}

@@ -16,11 +16,11 @@ Key definitions:
     Spectral gap = 1 - SLEM = 1 - |lambda_2(W)|
 
 Convergence bound:
-    ||x(t) - x*||^2 <= C * SLEM^t
-    => Error decays geometrically at rate SLEM per round.
+    ||x(t) - x*||^2 <= C * SLEM^(2t)
+    => Squared error contracts by at most SLEM squared per round for fixed symmetric averaging.
 
 Mixing time:
-    T_mix(eps) = log(1/eps) / log(1/SLEM) = log(1/eps) / log(1/(1-gamma))
+    T_mix(eps) = ceil(log(1/eps) / (2 log(1/SLEM))) for relative squared error.
 """
 
 import numpy as np
@@ -44,7 +44,7 @@ def compute_eigenvalues(W: np.ndarray) -> np.ndarray:
         |lambda_1| >= |lambda_2| >= ... >= |lambda_n|
     """
     evals = np.linalg.eigvalsh(W)          # real, sorted ascending
-    return np.sort(np.abs(evals))[::-1]    # sort descending by |.|
+    return evals[np.argsort(-np.abs(evals))]  # preserve signs, sort by modulus
 
 
 def compute_slem(W: np.ndarray) -> float:
@@ -54,7 +54,7 @@ def compute_slem(W: np.ndarray) -> float:
     This is the key quantity governing gossip convergence speed.
     """
     evals = compute_eigenvalues(W)
-    return float(evals[1]) if len(evals) > 1 else 0.0
+    return float(abs(evals[1])) if len(evals) > 1 else 0.0
 
 
 def compute_spectral_gap(W: np.ndarray) -> float:
@@ -66,16 +66,20 @@ def compute_mixing_time(spectral_gap: float, epsilon: float = 1e-3) -> float:
     """
     Theoretical mixing time: rounds to reach epsilon-consensus.
 
-    T_mix(eps) = log(1/eps) / log(1/SLEM) = log(1/eps) / log(1/(1-gamma))
+    T_mix(eps) = ceil(log(1/eps) / (2 log(1/SLEM))) for relative squared error.
 
     Returns inf if spectral_gap <= 0.
     """
+    if not 0 < epsilon < 1 or not -1e-12 <= spectral_gap <= 1 + 1e-12:
+        raise ValueError("Expected epsilon in (0,1) and spectral gap in [0,1]")
     if spectral_gap <= 1e-10:
         return float("inf")
     slem = 1.0 - spectral_gap
+    if slem <= 1e-15:
+        return 1.0
     if slem >= 1.0 - 1e-10:
         return float("inf")
-    return np.log(1.0 / epsilon) / np.log(1.0 / slem)
+    return float(np.ceil(np.log(1.0 / epsilon) / (2 * np.log(1.0 / slem))))
 
 
 def compute_theoretical_convergence(
@@ -84,13 +88,13 @@ def compute_theoretical_convergence(
     initial_error: float = 1.0,
 ) -> np.ndarray:
     """
-    Theoretical consensus error at each round:  E_t = E_0 * SLEM^t
+    Theoretical consensus error at each round:  E_t <= E_0 * SLEM^(2t)
 
     Returns np.ndarray of length (num_rounds + 1).
     """
     slem = max(0.0, 1.0 - spectral_gap)
     t    = np.arange(num_rounds + 1)
-    return initial_error * (slem ** t)
+    return initial_error * (slem ** (2 * t))
 
 
 # ── Topology profiling ────────────────────────────────────────────────────────
@@ -114,7 +118,7 @@ def profile_topology(
     graph    = create_topology(name, n, p=p, seed=seed)
     W        = get_mixing_matrix(graph)
     evals    = compute_eigenvalues(W)
-    slem     = float(evals[1]) if len(evals) > 1 else 0.0
+    slem     = float(abs(evals[1])) if len(evals) > 1 else 0.0
     gap      = 1.0 - slem
     degrees  = [d for _, d in graph.degree()]
 
@@ -125,7 +129,7 @@ def profile_topology(
         "avg_degree"      : float(np.mean(degrees)),
         "spectral_gap"    : gap,
         "slem"            : slem,
-        "lambda_min"      : float(evals[-1]),
+        "lambda_min"      : float(np.min(evals)),
         "all_eigenvalues" : evals.tolist(),
         "mixing_time_1e2" : compute_mixing_time(gap, 1e-2),
         "mixing_time_1e3" : compute_mixing_time(gap, 1e-3),

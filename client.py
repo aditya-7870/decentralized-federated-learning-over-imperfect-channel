@@ -45,6 +45,7 @@ class FLClient:
         lr: float = 0.01,
         momentum: float = 0.9,
         device: torch.device = torch.device("cpu"),
+        model_factory=MNISTNet,
     ):
         self.client_id = client_id
         self.train_loader = train_loader
@@ -52,7 +53,7 @@ class FLClient:
         self._use_amp = device.type == "cuda"   # AMP only on GPU
 
         # Model and optimizer
-        self.model = MNISTNet().to(self.device)
+        self.model = model_factory().to(self.device)
         self.optimizer = torch.optim.SGD(
             self.model.parameters(), lr=lr, momentum=momentum
         )
@@ -142,7 +143,7 @@ class FLClient:
                 outputs = self.model(images)
                 loss = self.criterion(outputs, labels)
 
-            total_loss += loss.item()
+            total_loss += loss.item() * labels.size(0)
             n_batches += 1
 
             _, predicted = torch.max(outputs, 1)
@@ -150,6 +151,6 @@ class FLClient:
             correct += (predicted == labels).sum().item()
 
         accuracy = correct / total if total > 0 else 0.0
-        avg_loss = total_loss / max(n_batches, 1)
+        avg_loss = total_loss / max(total, 1)
         return accuracy, avg_loss
 

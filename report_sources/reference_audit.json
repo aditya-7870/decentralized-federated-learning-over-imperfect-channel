@@ -1,0 +1,242 @@
+[
+  {
+    "supplied_row": 1,
+    "provided_doi": "10.1016/j.sysconle.2004.02.022",
+    "verified_doi": "10.1016/j.sysconle.2004.02.022",
+    "provided_year": "2004",
+    "verified_year": 2004,
+    "title": "Fast linear iterations for distributed averaging"
+  },
+  {
+    "supplied_row": 2,
+    "provided_doi": "10.1109/TIT.2006.874516",
+    "verified_doi": "10.1109/tit.2006.874516",
+    "provided_year": "2006",
+    "verified_year": 2006,
+    "title": "Randomized gossip algorithms"
+  },
+  {
+    "supplied_row": 3,
+    "provided_doi": "(no DOI - NeurIPS proceedings)",
+    "verified_doi": null,
+    "provided_year": "2017",
+    "verified_year": 2017,
+    "title": "Can Decentralized Algorithms Outperform Centralized Algorithms? A Case Study for Decentralized Parallel Stochastic Gradient Descent"
+  },
+  {
+    "supplied_row": 4,
+    "provided_doi": "10.1109/JPROC.2018.2817461",
+    "verified_doi": "10.1109/jproc.2018.2817461",
+    "provided_year": "2018",
+    "verified_year": 2018,
+    "title": "Network Topology and Communication-Computation Tradeoffs in Decentralized Optimization"
+  },
+  {
+    "supplied_row": 5,
+    "provided_doi": "(no DOI - PMLR proceedings)",
+    "verified_doi": null,
+    "provided_year": "2019",
+    "verified_year": 2019,
+    "title": "Decentralized Stochastic Optimization and Gossip Algorithms with Compressed Communication"
+  },
+  {
+    "supplied_row": 6,
+    "provided_doi": "10.1007/978-3-030-22496-7_5",
+    "verified_doi": "10.1007/978-3-030-22496-7_5",
+    "provided_year": "2019",
+    "verified_year": 2019,
+    "title": "Gossip Learning as a Decentralized Alternative to Federated Learning"
+  },
+  {
+    "supplied_row": 7,
+    "provided_doi": "10.1109/JIOT.2020.2964162",
+    "verified_doi": "10.1109/jiot.2020.2964162",
+    "provided_year": "2020",
+    "verified_year": 2020,
+    "title": "Federated Learning With Cooperating Devices: A Consensus Approach for Massive IoT Networks"
+  },
+  {
+    "supplied_row": 8,
+    "provided_doi": "10.1109/JSAC.2021.3118400",
+    "verified_doi": "10.1109/jsac.2021.3118400",
+    "provided_year": "2021",
+    "verified_year": 2021,
+    "title": "Federated Learning Over Wireless Device-to-Device Networks: Algorithms and Convergence Analysis"
+  },
+  {
+    "supplied_row": 9,
+    "provided_doi": "10.1109/JSAC.2021.3118346",
+    "verified_doi": "10.1109/jsac.2021.3118346",
+    "provided_year": "2021",
+    "verified_year": 2021,
+    "title": "Distributed Learning in Wireless Networks: Recent Progress and Future Challenges"
+  },
+  {
+    "supplied_row": 10,
+    "provided_doi": "10.1109/JSTSP.2022.3152445",
+    "verified_doi": "10.1109/jstsp.2022.3152445",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "Decentralized Federated Learning With Unreliable Communications"
+  },
+  {
+    "supplied_row": 11,
+    "provided_doi": "10.1109/TWC.2022.3172885",
+    "verified_doi": "10.1109/twc.2022.3172147",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "Decentralized Edge Learning via Unreliable Device-to-Device Communications"
+  },
+  {
+    "supplied_row": 12,
+    "provided_doi": "10.1109/TII.2021.3132492",
+    "verified_doi": "10.1109/tii.2022.3145010",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "Decentralized Wireless Federated Learning With Differential Privacy"
+  },
+  {
+    "supplied_row": 13,
+    "provided_doi": "10.1109/TPDS.2022.3230938",
+    "verified_doi": "10.1109/tpds.2022.3230938",
+    "provided_year": "2023",
+    "verified_year": 2023,
+    "title": "GossipFL: A Decentralized Federated Learning Framework With Sparsified and Adaptive Communication"
+  },
+  {
+    "supplied_row": 14,
+    "provided_doi": "(look up on IEEE Xplore - arXiv:2405.12894)",
+    "verified_doi": "10.1109/tcomm.2024.3407208",
+    "provided_year": "2024",
+    "verified_year": 2024,
+    "title": "Decentralized Federated Learning Over Imperfect Communication Channels"
+  },
+  {
+    "supplied_row": 15,
+    "provided_doi": "10.1109/TCOMM.2019.2944169",
+    "verified_doi": "10.1109/tcomm.2019.2944169",
+    "provided_year": "2020",
+    "verified_year": 2020,
+    "title": "Scheduling Policies for Federated Learning in Wireless Networks"
+  },
+  {
+    "supplied_row": 16,
+    "provided_doi": "10.1109/TCOMM.2021.3081746",
+    "verified_doi": "10.1109/tcomm.2021.3081746",
+    "provided_year": "2021",
+    "verified_year": 2021,
+    "title": "Federated Learning in Unreliable and Resource-Constrained Cellular Wireless Networks"
+  },
+  {
+    "supplied_row": 17,
+    "provided_doi": "10.1109/JSAC.2021.3118402",
+    "verified_doi": "10.1109/jsac.2021.3118402",
+    "provided_year": "2021",
+    "verified_year": 2021,
+    "title": "Learning Rate Optimization for Federated Learning Exploiting Over-the-Air Computation"
+  },
+  {
+    "supplied_row": 18,
+    "provided_doi": "10.1109/TWC.2021.3103874",
+    "verified_doi": "10.1109/twc.2021.3103874",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "Convergence of Federated Learning Over a Noisy Downlink"
+  },
+  {
+    "supplied_row": 19,
+    "provided_doi": "10.1109/JIOT.2022.3156046",
+    "verified_doi": "10.1109/jiot.2022.3156046",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "Fairness-Aware Federated Learning With Unreliable Links in Resource-Constrained Internet of Things"
+  },
+  {
+    "supplied_row": 20,
+    "provided_doi": "10.1109/TCCN.2022.3140788",
+    "verified_doi": "10.1109/tccn.2022.3140788",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "Federated Learning Over Noisy Channels: Convergence Analysis and Design Examples"
+  },
+  {
+    "supplied_row": 21,
+    "provided_doi": "10.1109/JIOT.2021.3095077",
+    "verified_doi": "10.1109/jiot.2021.3095077",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "A Survey on Federated Learning for Resource-Constrained IoT Devices"
+  },
+  {
+    "supplied_row": 22,
+    "provided_doi": "10.1109/TSIPN.2022.3151242",
+    "verified_doi": "10.1109/tsipn.2022.3151242",
+    "provided_year": "2022",
+    "verified_year": 2022,
+    "title": "Decentralized Federated Learning: Balancing Communication and Computing Costs"
+  },
+  {
+    "supplied_row": 23,
+    "provided_doi": "10.1109/COMST.2023.3315746",
+    "verified_doi": "10.1109/comst.2023.3315746",
+    "provided_year": "2023",
+    "verified_year": 2023,
+    "title": "Decentralized Federated Learning: Fundamentals, State of the Art, Frameworks, Trends, and Challenges"
+  },
+  {
+    "supplied_row": 24,
+    "provided_doi": "10.1109/JIOT.2024.3407584",
+    "verified_doi": "10.1109/jiot.2024.3407584",
+    "provided_year": "2024",
+    "verified_year": 2024,
+    "title": "Decentralized Federated Learning: A Survey and Perspective"
+  },
+  {
+    "supplied_row": 25,
+    "provided_doi": "10.1145/3785657",
+    "verified_doi": "10.1145/3785657",
+    "provided_year": "2025",
+    "verified_year": 2026,
+    "title": "Decentralized Federated Learning with Non-IID Data: Challenges, Trends, and Future Opportunities"
+  },
+  {
+    "supplied_row": 26,
+    "provided_doi": "10.48550/arXiv.1901.11173",
+    "verified_doi": "10.48550/arXiv.1901.11173",
+    "provided_year": "2019",
+    "verified_year": 2019,
+    "title": "Peer-to-peer Federated Learning on Graphs"
+  },
+  {
+    "supplied_row": 27,
+    "provided_doi": "10.1109/TPAMI.2022.3196503",
+    "verified_doi": "10.1109/tpami.2022.3196503",
+    "provided_year": "2023",
+    "verified_year": 2023,
+    "title": "Decentralized Federated Averaging"
+  },
+  {
+    "supplied_row": 28,
+    "provided_doi": "10.1109/MNET.132.2200530",
+    "verified_doi": "10.1109/mnet.132.2200530",
+    "provided_year": "2023",
+    "verified_year": 2023,
+    "title": "When Decentralized Optimization Meets Federated Learning"
+  },
+  {
+    "supplied_row": 29,
+    "provided_doi": "10.1109/TNNLS.2022.3170872",
+    "verified_doi": "10.1109/tnnls.2022.3170872",
+    "provided_year": "2023",
+    "verified_year": 2023,
+    "title": "Self-Organizing Democratized Learning: Toward Large-Scale Distributed Learning Systems"
+  },
+  {
+    "supplied_row": 30,
+    "provided_doi": "(look up on ScienceDirect - DOI not confirmed)",
+    "verified_doi": "10.1016/j.comnet.2025.111232",
+    "provided_year": "2025",
+    "verified_year": 2025,
+    "title": "Mobility-aware decentralized federated learning with joint optimization of local iteration and leader selection for vehicular networks"
+  }
+]

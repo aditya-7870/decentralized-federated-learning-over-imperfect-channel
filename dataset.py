@@ -65,11 +65,7 @@ def partition_non_iid(
 
     # Create shards
     total_shards = num_clients * shards_per_client
-    shard_size = len(dataset) // total_shards
-    shards = [
-        sorted_indices[i * shard_size: (i + 1) * shard_size].tolist()
-        for i in range(total_shards)
-    ]
+    shards = [s.tolist() for s in np.array_split(sorted_indices, total_shards)]
 
     # Randomly assign shards to clients
     shard_ids = np.arange(total_shards)
@@ -138,12 +134,13 @@ def prepare_dataloaders(
 
     # Build per-client DataLoaders
     train_loaders = []
-    for indices in client_indices:
+    for cid, indices in enumerate(client_indices):
         subset = Subset(train_dataset, indices)
         loader = DataLoader(
             subset,
             batch_size=batch_size,
             shuffle=True,
+            generator=torch.Generator().manual_seed(seed + 1000 + cid),
             pin_memory=pin,
             num_workers=workers,
             persistent_workers=(workers > 0),
@@ -161,3 +158,46 @@ def prepare_dataloaders(
     )
 
     return train_loaders, test_loader
+
+
+def partition_two_class(targets, num_clients, seed=42):
+    """Exactly two labels/client; disjoint complete cover for N >= 5.
+
+    Every class is split among its assigned clients; actual sizes are saved.
+    """
+    if num_clients < 5:
+        raise ValueError("Two-class full coverage of ten labels needs >=5 clients")
+    rng = np.random.default_rng(seed)
+    labels = rng.permutation(10)
+    assignments = [set(labels[(2*i+j) % 10] for j in range(2)) for i in range(num_clients)]
+    splits = [[] for _ in range(num_clients)]
+    targets = np.asarray(targets)
+    for label in range(10):
+        owners = [i for i, classes in enumerate(assignments) if label in classes]
+        indices = np.flatnonzero(targets == label)
+        rng.shuffle(indices)
+        for cid, chunk in zip(owners, np.array_split(indices, len(owners))):
+            splits[cid].extend(chunk.tolist())
+    return splits
+
+
+def partition_dirichlet(targets, num_clients, alpha=0.1, seed=42, min_size=100):
+    """Label-wise Dirichlet allocation with complete coverage and size guard."""
+    targets = np.asarray(targets)
+    if alpha <= 0 or len(targets) < num_clients * min_size:
+        raise ValueError("Invalid alpha or impossible minimum client size")
+    rng = np.random.default_rng(seed)
+    for _ in range(10000):
+        splits = [[] for _ in range(num_clients)]
+        for label in np.unique(targets):
+            indices = np.flatnonzero(targets == label)
+            rng.shuffle(indices)
+            proportions = rng.dirichlet(np.full(num_clients, alpha))
+            counts = rng.multinomial(len(indices), proportions)
+            offset = 0
+            for cid, count in enumerate(counts):
+                splits[cid].extend(indices[offset:offset+count].tolist())
+                offset += count
+        if min(map(len, splits)) >= min_size:
+            return splits
+    raise RuntimeError("Unable to sample nonempty Dirichlet partition")

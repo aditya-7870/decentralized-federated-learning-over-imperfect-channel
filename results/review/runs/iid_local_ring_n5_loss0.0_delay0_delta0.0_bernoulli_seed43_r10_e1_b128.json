@@ -1,0 +1,382 @@
+{
+  "schema_version": 2,
+  "config": {
+    "partition": "iid",
+    "method": "local",
+    "topology": "ring",
+    "seed": 43,
+    "clients": 5,
+    "rounds": 10,
+    "local_epochs": 1,
+    "batch_size": 128,
+    "lr": 0.01,
+    "momentum": 0.9,
+    "loss": 0.0,
+    "delay": 0,
+    "delta": 0.0,
+    "loss_model": "bernoulli",
+    "alpha": 0.1
+  },
+  "history": [
+    {
+      "round": 1,
+      "accuracy": 0.9090199999999999,
+      "loss": 0.2969583232700825,
+      "client_accuracies": [
+        0.9208,
+        0.899,
+        0.9126,
+        0.9104,
+        0.9023
+      ],
+      "consensus_error": 0.3885750472545624,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 2,
+      "accuracy": 0.94736,
+      "loss": 0.17181709766387937,
+      "client_accuracies": [
+        0.9479,
+        0.946,
+        0.945,
+        0.9543,
+        0.9436
+      ],
+      "consensus_error": 0.688609778881073,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 3,
+      "accuracy": 0.9629800000000002,
+      "loss": 0.11765707358717918,
+      "client_accuracies": [
+        0.9596,
+        0.9623,
+        0.9605,
+        0.9677,
+        0.9648
+      ],
+      "consensus_error": 1.017981767654419,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 4,
+      "accuracy": 0.96724,
+      "loss": 0.09781748566776514,
+      "client_accuracies": [
+        0.9646,
+        0.9702,
+        0.9673,
+        0.9708,
+        0.9633
+      ],
+      "consensus_error": 1.358201265335083,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 5,
+      "accuracy": 0.9689,
+      "loss": 0.09653252691030503,
+      "client_accuracies": [
+        0.9717,
+        0.9738,
+        0.9628,
+        0.9679,
+        0.9683
+      ],
+      "consensus_error": 1.710740327835083,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 6,
+      "accuracy": 0.97478,
+      "loss": 0.07745534524321557,
+      "client_accuracies": [
+        0.9739,
+        0.9787,
+        0.9754,
+        0.975,
+        0.9709
+      ],
+      "consensus_error": 2.0781564712524414,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 7,
+      "accuracy": 0.97578,
+      "loss": 0.07255836004391314,
+      "client_accuracies": [
+        0.9763,
+        0.9775,
+        0.9781,
+        0.9704,
+        0.9766
+      ],
+      "consensus_error": 2.4503231048583984,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 8,
+      "accuracy": 0.9766199999999999,
+      "loss": 0.07223575716838242,
+      "client_accuracies": [
+        0.977,
+        0.9788,
+        0.9756,
+        0.9777,
+        0.974
+      ],
+      "consensus_error": 2.8304283618927,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 9,
+      "accuracy": 0.9757999999999999,
+      "loss": 0.07453457288444043,
+      "client_accuracies": [
+        0.974,
+        0.9801,
+        0.9732,
+        0.9762,
+        0.9755
+      ],
+      "consensus_error": 3.2068214416503906,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 10,
+      "accuracy": 0.9796599999999998,
+      "loss": 0.06170979073271156,
+      "client_accuracies": [
+        0.9792,
+        0.9801,
+        0.9803,
+        0.9822,
+        0.9765
+      ],
+      "consensus_error": 3.5808358192443848,
+      "mean_drift": 0,
+      "triggered": 0,
+      "suppressed": 0,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    }
+  ],
+  "final_accuracy": 0.9796599999999998,
+  "final_consensus_error": 3.5808358192443848,
+  "communication": {
+    "attempted": 0,
+    "dropped": 0,
+    "delivered_immediate": 0,
+    "delayed": 0,
+    "delivered": 0,
+    "pending": 0,
+    "bytes_attempted": 0,
+    "bytes_delivered": 0
+  },
+  "full_gossip_messages": 100,
+  "message_savings_pct": 100.0,
+  "broadcast_suppression_pct": 0.0,
+  "elapsed_seconds": 11.677455199999713,
+  "parameter_count": 206922,
+  "bytes_per_message": 827688,
+  "spectral_gap": 0.4606553370833685,
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ]
+  ],
+  "partition_sizes": [
+    12000,
+    12000,
+    12000,
+    12000,
+    12000
+  ],
+  "partition_class_counts": [
+    [
+      1176,
+      1373,
+      1134,
+      1237,
+      1162,
+      1071,
+      1229,
+      1324,
+      1108,
+      1186
+    ],
+    [
+      1219,
+      1332,
+      1240,
+      1177,
+      1181,
+      1062,
+      1197,
+      1217,
+      1199,
+      1176
+    ],
+    [
+      1167,
+      1391,
+      1214,
+      1235,
+      1151,
+      1109,
+      1152,
+      1214,
+      1146,
+      1221
+    ],
+    [
+      1199,
+      1339,
+      1155,
+      1230,
+      1191,
+      1101,
+      1129,
+      1265,
+      1185,
+      1206
+    ],
+    [
+      1162,
+      1307,
+      1215,
+      1252,
+      1157,
+      1078,
+      1211,
+      1245,
+      1213,
+      1160
+    ]
+  ],
+  "partition_sha256": "0c2dd9fdf99f369ed8c4a9be9fd56beccd57a78e69828ea34ce69c2b74301c35",
+  "initial_sha256": "1dc829f31a3bc26106256eb99d66db9567cffc0ecf928084ced0e7ffcf76cf1e",
+  "final_parameter_sha256": [
+    "1e9988da94cd50656c82c64b6b57225a61f7e3b347fc4bfdc685408011a9d39e",
+    "d0694aaeadfc0d1ef04f8a1bb31e3395655d2dba20b459169168be8b3f0a72fb",
+    "1a784e75d87abdaa4e2f39cf3157167fdb3c642ea4aeb72c6978513fc4cf6839",
+    "df7cc7ce1a724d0dab7f020b265f65ca3badbf226fa21fe6e29b46aabfe8d22a",
+    "51c6f5ae9e7f77d9f690554bd9c9f6fc78d862ba908662c9f514eb33cae80feb"
+  ],
+  "environment": {
+    "python": "3.14.5",
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.4",
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "amp": true,
+    "deterministic_algorithms": true
+  },
+  "objective": "uniform mean of client losses; optimizer momentum remains local",
+  "channel_note": "GE: stationary initialization, pGB=.05, pBG=.2, erasure 0/1; stationary loss=.2"
+}

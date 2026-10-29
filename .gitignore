@@ -1,11 +1,59 @@
+# Local environments, downloaded datasets, and temporary work
 venv/
+.venv/
+.venv-*/
+venv-*/
+env/
+.env/
+.tox/
+.nox/
+.work/
+output/qa/
+output/qa-*/
 __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 .idea/
 .vscode/
 *.egg-info/
 .DS_Store
-data/MNIST/
+Thumbs.db
+Desktop.ini
+data/
 results/checkpoints/
+# Extra local training outputs; the completed results/review/ evidence stays.
+/results/revised/
+/runs/
+/wandb/
+/lightning_logs/
+/tensorboard/
+
+# Local secrets and temporary/editor output
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+*.bak
+*.orig
+*.swp
+*.swo
+~$*
+.~lock.*#
+
+# One-off inspection helpers and extracted text, not project source
+/extract_pdf.py
+/extract_pdf2.py
+/read_pdf.py
+/pdf_text.txt
+/results/m1
+
+# Keep reports, report-generation sources, review results, tests, and the
+# portable demo checkpoint. Do not add broad *.pdf / *.docx / *.pt rules.
+# Original report PDFs and teacher correction DOCX files at the root and in
+# Review/ are also part of the handover. .work/ contains internal QA copies.

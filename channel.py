@@ -1,187 +1,107 @@
+"""Discrete-round erasure channel with reproducible directed-link randomness.
+
+Gilbert-Elliott state advances once per link per round, even while its sender
+is silent. Delivery means arrival by the observation round, not scheduling.
 """
-channel.py — Imperfect communication channel simulation.
-
-Models two kinds of link impairment:
-  1. **Packet loss** — each transmission is independently dropped with
-     probability ``packet_loss_rate``.
-  2. **Asynchronous delay** — delivered updates are assigned a random
-     integer delay ∈ [0, max_delay]; a buffer holds delayed updates and
-     releases them in the appropriate future round.
-
-Every transmission event (sent / dropped / delayed / delivered) is logged
-so that communication statistics can be computed later.
-"""
-
+from dataclasses import dataclass
 import numpy as np
-from typing import Any, Dict, List, Optional, Tuple
-from dataclasses import dataclass, field
-
 
 @dataclass
 class TransmissionEvent:
-    """Record of a single transmission attempt."""
     round_num: int
     sender: int
     receiver: int
     dropped: bool
-    delay: int              # 0 = delivered immediately
-    delivery_round: int     # round_num + delay
-    bytes_size: int         # size of the parameter vector in bytes
-
+    delay: int
+    delivery_round: int
+    bytes_size: int
 
 class ImperfectChannel:
-    """
-    Simulates an imperfect communication link between nodes.
-
-    Parameters
-    ----------
-    packet_loss_rate : float
-        Probability of dropping any single update.
-    max_async_delay : int
-        Maximum random delay in rounds (0 means synchronous delivery).
-    seed : int
-        Random seed for reproducibility.
-    param_bytes : int
-        Size of one parameter vector in bytes (used for communication
-        cost accounting).
-    """
-
-    def __init__(
-        self,
-        packet_loss_rate: float = 0.0,
-        max_async_delay: int = 0,
-        seed: int = 42,
-        param_bytes: int = 0,
-    ):
+    def __init__(self, packet_loss_rate=0.0, max_async_delay=0, seed=42,
+                 param_bytes=0, loss_model="bernoulli", good_to_bad=0.05,
+                 bad_to_good=0.2):
+        if not 0 <= packet_loss_rate <= 1 or max_async_delay < 0:
+            raise ValueError("Invalid loss probability or delay")
+        if loss_model not in ("bernoulli", "gilbert-elliott"):
+            raise ValueError("Unknown channel model")
+        if not 0 < good_to_bad <= 1 or not 0 < bad_to_good <= 1:
+            raise ValueError("Invalid state transition probabilities")
         self.packet_loss_rate = packet_loss_rate
         self.max_async_delay = max_async_delay
-        self.rng = np.random.default_rng(seed)
+        self.seed = seed
         self.param_bytes = param_bytes
+        self.loss_model = loss_model
+        self.good_to_bad = good_to_bad
+        self.bad_to_good = bad_to_good
+        self.log = []
+        self._delay_buffer = {}
+        self.current_round = 0
+        self._states = {}
 
-        # Delay buffer: maps delivery_round → list of (sender, receiver, params)
-        self._delay_buffer: Dict[int, List[Tuple[int, int, Any]]] = {}
+    def _random(self, sender, receiver, rnd, stream):
+        return np.random.default_rng(np.random.SeedSequence(
+            [self.seed, sender, receiver, rnd, stream]))
 
-        # Full transmission log
-        self.log: List[TransmissionEvent] = []
+    def _is_bad(self, sender, receiver, rnd):
+        key = (sender, receiver)
+        if key not in self._states:
+            stationary = self.good_to_bad / (self.good_to_bad + self.bad_to_good)
+            bad = self._random(sender, receiver, 0, 3).random() < stationary
+            self._states[key] = (0, bad)
+        last, bad = self._states[key]
+        for step in range(last + 1, rnd + 1):
+            u = self._random(sender, receiver, step, 3).random()
+            bad = (u >= self.bad_to_good) if bad else (u < self.good_to_bad)
+        self._states[key] = (rnd, bad)
+        return bad
 
-    # ── Core API ─────────────────────────────────────────────────────────
-
-    def transmit(
-        self,
-        sender: int,
-        receiver: int,
-        params: Any,
-        round_num: int,
-    ) -> bool:
-        """
-        Attempt to send *params* from *sender* to *receiver* at *round_num*.
-
-        Returns ``True`` if the update is delivered immediately (delay = 0),
-        ``False`` if it was dropped or delayed (delayed updates will appear
-        in ``collect_delayed`` in a future round).
-        """
-        # Packet loss check
-        dropped = self.rng.random() < self.packet_loss_rate
-
-        if dropped:
-            self.log.append(TransmissionEvent(
-                round_num=round_num,
-                sender=sender,
-                receiver=receiver,
-                dropped=True,
-                delay=0,
-                delivery_round=-1,
-                bytes_size=self.param_bytes,
-            ))
-            return False
-
-        # Determine delay
-        delay = 0
-        if self.max_async_delay > 0:
-            delay = int(self.rng.integers(0, self.max_async_delay + 1))
-
-        delivery_round = round_num + delay
-
-        self.log.append(TransmissionEvent(
-            round_num=round_num,
-            sender=sender,
-            receiver=receiver,
-            dropped=False,
-            delay=delay,
-            delivery_round=delivery_round,
-            bytes_size=self.param_bytes,
-        ))
-
-        if delay == 0:
-            # Immediate delivery
-            return True
+    def transmit(self, sender, receiver, params, round_num):
+        self.current_round = max(self.current_round, round_num)
+        if self.loss_model == "gilbert-elliott":
+            # Good state: no erasure; bad state: all packets erased.
+            dropped = self._is_bad(sender, receiver, round_num)
         else:
-            # Store in delay buffer for future delivery
-            self._delay_buffer.setdefault(delivery_round, []).append(
-                (sender, receiver, params)
-            )
+            dropped = self._random(sender, receiver, round_num, 1).random() < self.packet_loss_rate
+        delay = 0 if dropped else int(self._random(sender, receiver, round_num, 2).integers(0, self.max_async_delay + 1))
+        arrival = -1 if dropped else round_num + delay
+        self.log.append(TransmissionEvent(round_num, sender, receiver, bool(dropped), delay, arrival, self.param_bytes))
+        if dropped:
             return False
+        if delay:
+            self._delay_buffer.setdefault(arrival, []).append((sender, receiver, params, round_num))
+            return False
+        return True
 
-    def collect_delayed(
-        self, current_round: int
-    ) -> List[Tuple[int, int, Any]]:
-        """
-        Retrieve all delayed updates scheduled for delivery at *current_round*.
-
-        Returns a list of ``(sender, receiver, params)`` tuples.
-        """
+    def collect_delayed(self, current_round):
+        self.current_round = max(self.current_round, current_round)
         return self._delay_buffer.pop(current_round, [])
 
-    # ── Statistics ───────────────────────────────────────────────────────
-
-    def get_round_stats(self, round_num: int) -> Dict[str, int]:
-        """
-        Return communication statistics for a specific round.
-
-        Keys: ``attempted``, ``dropped``, ``delivered_immediate``,
-        ``delayed``, ``bytes_attempted``, ``bytes_delivered``.
-        """
+    def get_round_stats(self, round_num):
         events = [e for e in self.log if e.round_num == round_num]
-        attempted = len(events)
-        dropped = sum(1 for e in events if e.dropped)
-        delayed = sum(1 for e in events if not e.dropped and e.delay > 0)
-        delivered_immediate = attempted - dropped - delayed
-        bytes_attempted = sum(e.bytes_size for e in events)
-        bytes_delivered = sum(e.bytes_size for e in events if not e.dropped)
-
+        arrivals = [e for e in self.log if not e.dropped and e.delivery_round == round_num]
         return {
-            "attempted": attempted,
-            "dropped": dropped,
-            "delivered_immediate": delivered_immediate,
-            "delayed": delayed,
-            "bytes_attempted": bytes_attempted,
-            "bytes_delivered": bytes_delivered,
+            "attempted": len(events), "dropped": sum(e.dropped for e in events),
+            "delivered_immediate": sum(not e.dropped and e.delay == 0 for e in events),
+            "delayed": sum(not e.dropped and e.delay > 0 for e in events),
+            "delivered": len(arrivals),
+            "bytes_attempted": sum(e.bytes_size for e in events),
+            "bytes_delivered": sum(e.bytes_size for e in arrivals),
         }
 
-    def get_total_stats(self) -> Dict[str, int]:
-        """Aggregate communication statistics across all rounds."""
-        total = {
-            "attempted": 0,
-            "dropped": 0,
-            "delivered_immediate": 0,
-            "delayed": 0,
-            "bytes_attempted": 0,
-            "bytes_delivered": 0,
+    def get_total_stats(self):
+        arrived = [e for e in self.log if not e.dropped and e.delivery_round <= self.current_round]
+        return {
+            "attempted": len(self.log), "dropped": sum(e.dropped for e in self.log),
+            "delivered_immediate": sum(not e.dropped and e.delay == 0 for e in self.log),
+            "delayed": sum(not e.dropped and e.delay > 0 for e in self.log),
+            "delivered": len(arrived),
+            "pending": sum(not e.dropped and e.delivery_round > self.current_round for e in self.log),
+            "bytes_attempted": sum(e.bytes_size for e in self.log),
+            "bytes_delivered": sum(e.bytes_size for e in arrived),
         }
-        for e in self.log:
-            total["attempted"] += 1
-            total["bytes_attempted"] += e.bytes_size
-            if e.dropped:
-                total["dropped"] += 1
-            elif e.delay > 0:
-                total["delayed"] += 1
-                total["bytes_delivered"] += e.bytes_size
-            else:
-                total["delivered_immediate"] += 1
-                total["bytes_delivered"] += e.bytes_size
-        return total
 
-    def reset(self) -> None:
-        """Clear all logs and the delay buffer."""
+    def reset(self):
         self.log.clear()
         self._delay_buffer.clear()
+        self._states.clear()
+        self.current_round = 0

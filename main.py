@@ -65,6 +65,9 @@ def run_experiment(
 
     # ── Seed for reproducibility within each experiment
     set_seed(cfg.seed)
+    for cid, loader in enumerate(train_loaders):
+        if loader.generator is not None:
+            loader.generator.manual_seed(cfg.seed + 1000 + cid)
 
     # ── Build topology
     graph = create_topology(
@@ -136,10 +139,14 @@ def run_experiment(
     # ── Save per-experiment results
     result = logger.get_final_summary(channel)
     result["spectral_gap"] = spectral_gap
+    from dataclasses import asdict
+    result["config"] = asdict(cfg)
+    result["mean_drift"] = aggregator.mean_drift_history
 
     exp_name = experiment_name(topology_name, packet_loss_rate, max_async_delay)
     json_path = os.path.join(cfg.results_dir, f"{exp_name}.json")
-    logger.save_json(json_path, channel)
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(result, f, indent=2)
     print(f"  → Saved results to {json_path}")
 
     ckpt_dir = os.path.join(cfg.results_dir, "checkpoints", exp_name)

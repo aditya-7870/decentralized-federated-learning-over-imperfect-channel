@@ -1,0 +1,382 @@
+{
+  "schema_version": 2,
+  "config": {
+    "partition": "dirichlet",
+    "method": "event",
+    "topology": "ring",
+    "seed": 45,
+    "clients": 5,
+    "rounds": 10,
+    "local_epochs": 1,
+    "batch_size": 128,
+    "lr": 0.01,
+    "momentum": 0.9,
+    "loss": 0.0,
+    "delay": 0,
+    "delta": 0.5,
+    "loss_model": "bernoulli",
+    "alpha": 0.1
+  },
+  "history": [
+    {
+      "round": 1,
+      "accuracy": 0.28837999999999997,
+      "loss": 2.6334202480316167,
+      "client_accuracies": [
+        0.1788,
+        0.203,
+        0.2754,
+        0.3591,
+        0.4256
+      ],
+      "consensus_error": 0.5610409379005432,
+      "mean_drift": 5.995775040901208e-07,
+      "triggered": 5,
+      "suppressed": 0,
+      "attempted": 10,
+      "dropped": 0,
+      "delivered_immediate": 10,
+      "delayed": 0,
+      "delivered": 10,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 8276880
+    },
+    {
+      "round": 2,
+      "accuracy": 0.56728,
+      "loss": 1.4801617300510403,
+      "client_accuracies": [
+        0.6118,
+        0.4358,
+        0.4773,
+        0.6518,
+        0.6597
+      ],
+      "consensus_error": 0.6590539813041687,
+      "mean_drift": 5.963075864201528e-07,
+      "triggered": 5,
+      "suppressed": 0,
+      "attempted": 10,
+      "dropped": 0,
+      "delivered_immediate": 10,
+      "delayed": 0,
+      "delivered": 10,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 8276880
+    },
+    {
+      "round": 3,
+      "accuracy": 0.6271199999999999,
+      "loss": 1.2439134323596952,
+      "client_accuracies": [
+        0.6828,
+        0.5369,
+        0.5603,
+        0.6549,
+        0.7007
+      ],
+      "consensus_error": 0.40669727325439453,
+      "mean_drift": 6.27794918273139e-07,
+      "triggered": 5,
+      "suppressed": 0,
+      "attempted": 10,
+      "dropped": 0,
+      "delivered_immediate": 10,
+      "delayed": 0,
+      "delivered": 10,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 8276880
+    },
+    {
+      "round": 4,
+      "accuracy": 0.74802,
+      "loss": 0.8373575049638747,
+      "client_accuracies": [
+        0.8274,
+        0.6559,
+        0.6687,
+        0.7767,
+        0.8114
+      ],
+      "consensus_error": 0.2729904353618622,
+      "mean_drift": 6.298976700236381e-07,
+      "triggered": 5,
+      "suppressed": 0,
+      "attempted": 10,
+      "dropped": 0,
+      "delivered_immediate": 10,
+      "delayed": 0,
+      "delivered": 10,
+      "bytes_attempted": 8276880,
+      "bytes_delivered": 8276880
+    },
+    {
+      "round": 5,
+      "accuracy": 0.75538,
+      "loss": 0.9308206140995026,
+      "client_accuracies": [
+        0.8533,
+        0.6036,
+        0.7,
+        0.7788,
+        0.8412
+      ],
+      "consensus_error": 0.3279182016849518,
+      "mean_drift": 0.21774786710739136,
+      "triggered": 3,
+      "suppressed": 2,
+      "attempted": 6,
+      "dropped": 0,
+      "delivered_immediate": 6,
+      "delayed": 0,
+      "delivered": 6,
+      "bytes_attempted": 4966128,
+      "bytes_delivered": 4966128
+    },
+    {
+      "round": 6,
+      "accuracy": 0.76534,
+      "loss": 0.8343814247846604,
+      "client_accuracies": [
+        0.6635,
+        0.794,
+        0.7844,
+        0.7233,
+        0.8615
+      ],
+      "consensus_error": 0.24244248867034912,
+      "mean_drift": 0.123741514980793,
+      "triggered": 4,
+      "suppressed": 1,
+      "attempted": 8,
+      "dropped": 0,
+      "delivered_immediate": 8,
+      "delayed": 0,
+      "delivered": 8,
+      "bytes_attempted": 6621504,
+      "bytes_delivered": 6621504
+    },
+    {
+      "round": 7,
+      "accuracy": 0.8071400000000001,
+      "loss": 0.6260882705450059,
+      "client_accuracies": [
+        0.8535,
+        0.7613,
+        0.7529,
+        0.8619,
+        0.8061
+      ],
+      "consensus_error": 0.2609233558177948,
+      "mean_drift": 0.19976414740085602,
+      "triggered": 3,
+      "suppressed": 2,
+      "attempted": 6,
+      "dropped": 0,
+      "delivered_immediate": 6,
+      "delayed": 0,
+      "delivered": 6,
+      "bytes_attempted": 4966128,
+      "bytes_delivered": 4966128
+    },
+    {
+      "round": 8,
+      "accuracy": 0.7768200000000001,
+      "loss": 0.7073553669452667,
+      "client_accuracies": [
+        0.7702,
+        0.7702,
+        0.7976,
+        0.6826,
+        0.8635
+      ],
+      "consensus_error": 0.2768215537071228,
+      "mean_drift": 0.20298396050930023,
+      "triggered": 2,
+      "suppressed": 3,
+      "attempted": 4,
+      "dropped": 0,
+      "delivered_immediate": 4,
+      "delayed": 0,
+      "delivered": 4,
+      "bytes_attempted": 3310752,
+      "bytes_delivered": 3310752
+    },
+    {
+      "round": 9,
+      "accuracy": 0.87996,
+      "loss": 0.39075611039996144,
+      "client_accuracies": [
+        0.8752,
+        0.8758,
+        0.8452,
+        0.9276,
+        0.876
+      ],
+      "consensus_error": 0.16255983710289001,
+      "mean_drift": 0.10925430059432983,
+      "triggered": 4,
+      "suppressed": 1,
+      "attempted": 8,
+      "dropped": 0,
+      "delivered_immediate": 8,
+      "delayed": 0,
+      "delivered": 8,
+      "bytes_attempted": 6621504,
+      "bytes_delivered": 6621504
+    },
+    {
+      "round": 10,
+      "accuracy": 0.7715799999999999,
+      "loss": 0.7600038877129555,
+      "client_accuracies": [
+        0.8145,
+        0.6316,
+        0.8396,
+        0.6896,
+        0.8826
+      ],
+      "consensus_error": 0.2664027214050293,
+      "mean_drift": 0.13044026494026184,
+      "triggered": 1,
+      "suppressed": 4,
+      "attempted": 2,
+      "dropped": 0,
+      "delivered_immediate": 2,
+      "delayed": 0,
+      "delivered": 2,
+      "bytes_attempted": 1655376,
+      "bytes_delivered": 1655376
+    }
+  ],
+  "final_accuracy": 0.7715799999999999,
+  "final_consensus_error": 0.2664027214050293,
+  "communication": {
+    "attempted": 74,
+    "dropped": 0,
+    "delivered_immediate": 74,
+    "delayed": 0,
+    "delivered": 74,
+    "pending": 0,
+    "bytes_attempted": 61248912,
+    "bytes_delivered": 61248912
+  },
+  "full_gossip_messages": 100,
+  "message_savings_pct": 26.0,
+  "broadcast_suppression_pct": 26.0,
+  "elapsed_seconds": 11.790325800000574,
+  "parameter_count": 206922,
+  "bytes_per_message": 827688,
+  "spectral_gap": 0.4606553370833685,
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ]
+  ],
+  "partition_sizes": [
+    14749,
+    6114,
+    15232,
+    5415,
+    18490
+  ],
+  "partition_class_counts": [
+    [
+      2,
+      0,
+      1,
+      2039,
+      1200,
+      5022,
+      524,
+      3464,
+      81,
+      2416
+    ],
+    [
+      1,
+      0,
+      1,
+      154,
+      2451,
+      6,
+      0,
+      0,
+      0,
+      3501
+    ],
+    [
+      3573,
+      14,
+      5956,
+      2819,
+      1575,
+      0,
+      1286,
+      1,
+      6,
+      2
+    ],
+    [
+      1131,
+      0,
+      0,
+      1119,
+      19,
+      393,
+      5,
+      2747,
+      0,
+      1
+    ],
+    [
+      1216,
+      6728,
+      0,
+      0,
+      597,
+      0,
+      4103,
+      53,
+      5764,
+      29
+    ]
+  ],
+  "partition_sha256": "4dbb580c2db9e6323cc61f59e60a73bfc381ad023e517f6349664ffce6276a12",
+  "initial_sha256": "dcb9039500234b2e5605be907287c37aaaf1cb51c8fe2b45d30dc62d47dbb290",
+  "final_parameter_sha256": [
+    "f143638690ba499a151760f1898800c2a1971cfcba6527aebbc7c825039a3501",
+    "fa0624c1ab3108bcbb0357f54ee300d3fde7d7716e5c5ca2f17d0c64dd8f9e10",
+    "2e5eafaaca02c31d370322cd8f3b89812175518def7a7f96ddd04512ca31ab30",
+    "c63a2cda39a5ad176d02022289fe034bec4e1f63d52bd7b66b53827438c04946",
+    "5043ec3c38cea14be29e213066dfc72aaeca5e298994ca0d3c747cbd13cbeef2"
+  ],
+  "environment": {
+    "python": "3.14.5",
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.4",
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "amp": true,
+    "deterministic_algorithms": true
+  },
+  "objective": "uniform mean of client losses; optimizer momentum remains local",
+  "channel_note": "GE: stationary initialization, pGB=.05, pBG=.2, erasure 0/1; stationary loss=.2"
+}

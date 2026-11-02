@@ -1,0 +1,45 @@
+{
+  "gpu_zero_threshold_checks": [
+    {
+      "seed": 42,
+      "rounds": 10,
+      "exact_initial_and_all_final_client_hashes": true,
+      "exact_per_round_accuracy": true
+    },
+    {
+      "seed": 43,
+      "rounds": 10,
+      "exact_initial_and_all_final_client_hashes": true,
+      "exact_per_round_accuracy": true
+    },
+    {
+      "seed": 44,
+      "rounds": 10,
+      "exact_initial_and_all_final_client_hashes": true,
+      "exact_per_round_accuracy": true
+    },
+    {
+      "seed": 45,
+      "rounds": 10,
+      "exact_initial_and_all_final_client_hashes": true,
+      "exact_per_round_accuracy": true
+    },
+    {
+      "seed": 46,
+      "rounds": 10,
+      "exact_initial_and_all_final_client_hashes": true,
+      "exact_per_round_accuracy": true
+    }
+  ],
+  "partition": "dirichlet",
+  "clients": 5,
+  "device": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "regression_tests_passed": 15,
+  "saved_run_invariants_passed": 155,
+  "portable_cpu_prediction_demo": {
+    "device": "cpu",
+    "correct": 20,
+    "examples": 20
+  },
+  "standard_library_summary_viewer_passed": true
+}

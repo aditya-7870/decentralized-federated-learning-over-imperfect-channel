@@ -1,0 +1,382 @@
+{
+  "schema_version": 2,
+  "config": {
+    "partition": "dirichlet",
+    "method": "event",
+    "topology": "ring",
+    "seed": 45,
+    "clients": 5,
+    "rounds": 10,
+    "local_epochs": 1,
+    "batch_size": 128,
+    "lr": 0.01,
+    "momentum": 0.9,
+    "loss": 0.0,
+    "delay": 0,
+    "delta": 2.0,
+    "loss_model": "bernoulli",
+    "alpha": 0.1
+  },
+  "history": [
+    {
+      "round": 1,
+      "accuracy": 0.39178,
+      "loss": 2.607931084632874,
+      "client_accuracies": [
+        0.4573,
+        0.203,
+        0.4822,
+        0.3591,
+        0.4573
+      ],
+      "consensus_error": 1.2599490880966187,
+      "mean_drift": 0.4853457510471344,
+      "triggered": 3,
+      "suppressed": 2,
+      "attempted": 6,
+      "dropped": 0,
+      "delivered_immediate": 6,
+      "delayed": 0,
+      "delivered": 6,
+      "bytes_attempted": 4966128,
+      "bytes_delivered": 4966128
+    },
+    {
+      "round": 2,
+      "accuracy": 0.44084,
+      "loss": 2.5751946306228635,
+      "client_accuracies": [
+        0.3922,
+        0.2869,
+        0.4203,
+        0.4039,
+        0.7009
+      ],
+      "consensus_error": 1.1842631101608276,
+      "mean_drift": 0.3970857858657837,
+      "triggered": 2,
+      "suppressed": 3,
+      "attempted": 4,
+      "dropped": 0,
+      "delivered_immediate": 4,
+      "delayed": 0,
+      "delivered": 4,
+      "bytes_attempted": 3310752,
+      "bytes_delivered": 3310752
+    },
+    {
+      "round": 3,
+      "accuracy": 0.48132,
+      "loss": 3.0166789627075197,
+      "client_accuracies": [
+        0.6089,
+        0.2908,
+        0.4885,
+        0.443,
+        0.5754
+      ],
+      "consensus_error": 2.193925619125366,
+      "mean_drift": 0.0,
+      "triggered": 0,
+      "suppressed": 5,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 4,
+      "accuracy": 0.66792,
+      "loss": 1.522205295562744,
+      "client_accuracies": [
+        0.8167,
+        0.4764,
+        0.5123,
+        0.7175,
+        0.8167
+      ],
+      "consensus_error": 1.4648370742797852,
+      "mean_drift": 0.34286603331565857,
+      "triggered": 2,
+      "suppressed": 3,
+      "attempted": 4,
+      "dropped": 0,
+      "delivered_immediate": 4,
+      "delayed": 0,
+      "delivered": 4,
+      "bytes_attempted": 3310752,
+      "bytes_delivered": 3310752
+    },
+    {
+      "round": 5,
+      "accuracy": 0.56402,
+      "loss": 2.423325939178467,
+      "client_accuracies": [
+        0.6829,
+        0.3919,
+        0.5574,
+        0.5647,
+        0.6232
+      ],
+      "consensus_error": 1.9666012525558472,
+      "mean_drift": 0.0,
+      "triggered": 0,
+      "suppressed": 5,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 6,
+      "accuracy": 0.62294,
+      "loss": 1.8442706632614136,
+      "client_accuracies": [
+        0.6806,
+        0.5519,
+        0.5873,
+        0.6374,
+        0.6575
+      ],
+      "consensus_error": 1.8583868741989136,
+      "mean_drift": 0.46458899974823,
+      "triggered": 1,
+      "suppressed": 4,
+      "attempted": 2,
+      "dropped": 0,
+      "delivered_immediate": 2,
+      "delayed": 0,
+      "delivered": 2,
+      "bytes_attempted": 1655376,
+      "bytes_delivered": 1655376
+    },
+    {
+      "round": 7,
+      "accuracy": 0.60108,
+      "loss": 1.981901652812958,
+      "client_accuracies": [
+        0.7073,
+        0.4795,
+        0.5735,
+        0.5736,
+        0.6715
+      ],
+      "consensus_error": 2.2257795333862305,
+      "mean_drift": 0.0,
+      "triggered": 0,
+      "suppressed": 5,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 8,
+      "accuracy": 0.60934,
+      "loss": 2.0533909678459166,
+      "client_accuracies": [
+        0.7071,
+        0.4674,
+        0.6167,
+        0.5972,
+        0.6583
+      ],
+      "consensus_error": 2.530954122543335,
+      "mean_drift": 0.0,
+      "triggered": 0,
+      "suppressed": 5,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 9,
+      "accuracy": 0.60528,
+      "loss": 2.068747806549072,
+      "client_accuracies": [
+        0.696,
+        0.4557,
+        0.6044,
+        0.5929,
+        0.6774
+      ],
+      "consensus_error": 2.802809476852417,
+      "mean_drift": 0.0,
+      "triggered": 0,
+      "suppressed": 5,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    },
+    {
+      "round": 10,
+      "accuracy": 0.60498,
+      "loss": 2.1769502115249635,
+      "client_accuracies": [
+        0.6911,
+        0.4536,
+        0.6181,
+        0.5865,
+        0.6756
+      ],
+      "consensus_error": 3.0789153575897217,
+      "mean_drift": 0.0,
+      "triggered": 0,
+      "suppressed": 5,
+      "attempted": 0,
+      "dropped": 0,
+      "delivered_immediate": 0,
+      "delayed": 0,
+      "delivered": 0,
+      "bytes_attempted": 0,
+      "bytes_delivered": 0
+    }
+  ],
+  "final_accuracy": 0.60498,
+  "final_consensus_error": 3.0789153575897217,
+  "communication": {
+    "attempted": 16,
+    "dropped": 0,
+    "delivered_immediate": 16,
+    "delayed": 0,
+    "delivered": 16,
+    "pending": 0,
+    "bytes_attempted": 13243008,
+    "bytes_delivered": 13243008
+  },
+  "full_gossip_messages": 100,
+  "message_savings_pct": 84.0,
+  "broadcast_suppression_pct": 84.0,
+  "elapsed_seconds": 10.857603399999789,
+  "parameter_count": 206922,
+  "bytes_per_message": 827688,
+  "spectral_gap": 0.4606553370833685,
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ]
+  ],
+  "partition_sizes": [
+    14749,
+    6114,
+    15232,
+    5415,
+    18490
+  ],
+  "partition_class_counts": [
+    [
+      2,
+      0,
+      1,
+      2039,
+      1200,
+      5022,
+      524,
+      3464,
+      81,
+      2416
+    ],
+    [
+      1,
+      0,
+      1,
+      154,
+      2451,
+      6,
+      0,
+      0,
+      0,
+      3501
+    ],
+    [
+      3573,
+      14,
+      5956,
+      2819,
+      1575,
+      0,
+      1286,
+      1,
+      6,
+      2
+    ],
+    [
+      1131,
+      0,
+      0,
+      1119,
+      19,
+      393,
+      5,
+      2747,
+      0,
+      1
+    ],
+    [
+      1216,
+      6728,
+      0,
+      0,
+      597,
+      0,
+      4103,
+      53,
+      5764,
+      29
+    ]
+  ],
+  "partition_sha256": "4dbb580c2db9e6323cc61f59e60a73bfc381ad023e517f6349664ffce6276a12",
+  "initial_sha256": "dcb9039500234b2e5605be907287c37aaaf1cb51c8fe2b45d30dc62d47dbb290",
+  "final_parameter_sha256": [
+    "1e1a5a8439abac48fd01f0aa8d6d89f4e1a88e7c819063b6d37fa6903332d1da",
+    "c21c424d102977add42dce8f3ad3fb75d130d79b698c8f4811e560a37c913ad1",
+    "c78b935a24c28eef3d5300b59817b29f9de5e3ef0d72d26e405a43eeb7dc499c",
+    "c170ba50e4c41546d3955a8a2a10eb49d321d5f5d80dd13e5d6fca86d39fb249",
+    "6c5a370e30f8079cfc297d9f3571138ceedef695aece814411b73f28e41b77f0"
+  ],
+  "environment": {
+    "python": "3.14.5",
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.4",
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "amp": true,
+    "deterministic_algorithms": true
+  },
+  "objective": "uniform mean of client losses; optimizer momentum remains local",
+  "channel_note": "GE: stationary initialization, pGB=.05, pBG=.2, erasure 0/1; stationary loss=.2"
+}
